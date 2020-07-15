@@ -1,32 +1,12 @@
 import wrapper from "../store-redux/store";
 import Header from "../component/Header";
-
-// const WrappedApp = ({ Component, pageProps }) => {
-//   return (
-//     <div>
-//       <Header />
-//       <Component {...pageProps} />
-//       <Footerz />
-//     </div>
-//   );
-// };
-
-// export default wrapper.withRedux(WrappedApp);
-
-// const Headerz = () => {
-//   return <div>header</div>;
-// };
-
-// const Footerz = () => {
-//   return <div>footer</div>;
-// };
-
 import React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../lib/theme.js";
+import Container from "@material-ui/core/Container";
 
 function MyApp(props) {
   const { Component, pageProps } = props;
@@ -49,10 +29,11 @@ function MyApp(props) {
         />
       </Head>
       <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <Header />
         <CssBaseline />
-        <Component {...pageProps} />
+        <Container style={{ marginTop: "40px" }}>
+          <Component {...pageProps} />
+        </Container>
       </ThemeProvider>
     </React.Fragment>
   );
