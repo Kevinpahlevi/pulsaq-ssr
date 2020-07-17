@@ -17,7 +17,8 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Flag from "react-world-flags";
-import Confirm from "../component/ConfirmPurchase";
+import Confirm from "../../component/ConfirmPurchase";
+import Head from "next/head";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -30,8 +31,14 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10px",
   },
 }));
-function data(props) {
+function prepaid(props) {
   const classes = useStyles();
+
+  React.useEffect(() => {
+    console.log(props);
+  }, []);
+
+  const { country } = props.router.query;
 
   const [phone, setPhone] = React.useState("");
   const [open, setOpen] = React.useState(false);
@@ -40,17 +47,9 @@ function data(props) {
   const [selectedDenom, setSelectedDenom] = React.useState("");
 
   const providerID = [
-    { signature: "89", name: "Three Indonesia data package", code: "three" },
-    {
-      signature: "81",
-      name: "Indosat Indonesia data package",
-      code: "indosat",
-    },
-    {
-      signature: "88",
-      name: "Smartfren Indonesia data package",
-      code: "smartfren",
-    },
+    { signature: "89", name: "Three Indonesia topup", code: "three" },
+    { signature: "81", name: "Indosat Indonesia topup", code: "indosat" },
+    { signature: "88", name: "Smartfren Indonesia topup", code: "smartfren" },
   ];
 
   const providerMY = [
@@ -61,22 +60,15 @@ function data(props) {
 
   const code = { ID: "+62", MY: "+60" };
   const denoID = {
-    three: ["1GB - IDR 5000", "2,5GB - IDR 10,000", "15GB - IDR 50,000"],
-    indosat: ["500MB - IDR 5000", "2,5GB - IDR 20,000", "6GB - IDR 50,000"],
-    smartfren: [
-      "1GB - IDR 5000",
-      "4GB - IDR 15,000",
-      "15GB - IDR 50,000",
-      "35GB - IDR 100,000",
-    ],
+    three: ["IDR 5000", "IDR 10,000", "IDR 50,000"],
+    indosat: ["IDR 5000", "IDR 20,000", "IDR 50,000"],
+    smartfren: ["IDR 5000", "IDR 15,000", "IDR 50,000", "IDR 100,000"],
   };
   const denoMY = {
     altel: ["MYR 5.00", "MYR 10.00"],
     buzzme: ["MYR 5.00", "MYR 10.00", "MYR 15.00"],
     celcom: ["MYR 5.00", "MYR 10.00", "MYR 20.00", "MYR 50.00"],
   };
-
-  const { country } = props.router.query;
 
   React.useEffect(() => {
     if (country === "ID") {
@@ -129,6 +121,9 @@ function data(props) {
 
   return (
     <div>
+      <Head>
+        <title>Mobile Prepaid</title>
+      </Head>
       <Confirm
         open={open}
         handleClose={() => setOpen(false)}
@@ -138,7 +133,7 @@ function data(props) {
           denom: selectedDenom,
         }}
       />
-      <div className={classes.title}>Data - {country}</div>
+      <div className={classes.title}>Prepaid - {country}</div>
       <Paper className={classes.paper}>
         <Grid container direction="column" spacing={2}>
           <Grid item>
@@ -149,7 +144,11 @@ function data(props) {
               <OutlinedInput
                 id="outlined-adornment-amount"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => {
+                  if (/^[0-9]*$/.test(e.target.value)) {
+                    setPhone(e.target.value);
+                  }
+                }}
                 startAdornment={
                   <InputAdornment position="start">
                     {code[country] || ""}
@@ -210,4 +209,25 @@ function data(props) {
   );
 }
 
-export default withRouter(data);
+export async function getStaticProps(props) {
+  // Call an external API endpoint to get posts
+  // By returning { props: posts }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props,
+  };
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      // String variant:
+      // Object variant:
+      { params: { country: "ID" } },
+      { params: { country: "MY" } },
+    ],
+    fallback: false,
+  };
+}
+
+export default withRouter(prepaid);

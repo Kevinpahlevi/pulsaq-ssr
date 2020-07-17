@@ -17,7 +17,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Flag from "react-world-flags";
-import Confirm from "../component/ConfirmPurchase";
+// import Confirm from "../component/ConfirmPurchase";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10px",
   },
 }));
-function postpaid(props) {
+function data(props) {
   const classes = useStyles();
 
   const [phone, setPhone] = React.useState("");
@@ -129,7 +129,7 @@ function postpaid(props) {
 
   return (
     <div>
-      <Confirm
+      {/* <Confirm
         open={open}
         handleClose={() => setOpen(false)}
         data={{
@@ -137,10 +137,43 @@ function postpaid(props) {
           product: selectedProduct,
           denom: selectedDenom,
         }}
-      />
-      <div className={classes.title}>Postpaid - {country}</div>
+      /> */}
+      <div className={classes.title}>Data - {country}</div>
       <Paper className={classes.paper}>
         <Grid container direction="column" spacing={2}>
+          <Grid item>
+            <FormControl fullWidth variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-amount">
+                Phone / Bill Number
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-amount"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                startAdornment={
+                  <InputAdornment position="start">
+                    {code[country] || ""}
+                  </InputAdornment>
+                }
+                labelWidth={150}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item>
+            <TextField
+              fullWidth
+              id="outlined-basic"
+              label="Product"
+              value={selectedProduct.name || ""}
+              placeholder="Insert Phone / Bill Number"
+              InputProps={{
+                readOnly: true,
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </Grid>
           <Grid item>
             <FormControl fullWidth className={classes.formControl}>
               <InputLabel id="demo-simple-select-label">Amount</InputLabel>
@@ -157,36 +190,6 @@ function postpaid(props) {
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
-          </Grid>
-          <Grid item>
-            <FormControl fullWidth>
-              <InputLabel htmlFor="outlined-adornment-amount">
-                Phone / Bill Number
-              </InputLabel>
-              <Input
-                id="outlined-adornment-amount"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                startAdornment={
-                  <InputAdornment position="start">
-                    {code[country] || ""}
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-          </Grid>
-          <Grid item>
-            <FormControl fullWidth>
-              <InputLabel htmlFor="input-amount">Amount</InputLabel>
-              <Input
-                id="input-amount"
-                value={phone}
-                // onChange={(e) => setPhone(e.target.value)}
-                startAdornment={
-                  <InputAdornment position="start">MYR</InputAdornment>
-                }
-              />
             </FormControl>
           </Grid>
           <Grid item>
@@ -207,4 +210,4 @@ function postpaid(props) {
   );
 }
 
-export default withRouter(postpaid);
+export default withRouter(data);

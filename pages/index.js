@@ -68,7 +68,7 @@ function input(props) {
         <Grid container direction="row" justify="center" spacing={2}>
           {/* Indonesia */}
           <Grid item>
-            <Link href={`/prepaid?country=ID`}>
+            <Link href="/prepaid/[country]" as="/prepaid/ID">
               <a className={classes.link}>
                 <Paper className={classes.paper}>
                   <div>
@@ -83,7 +83,7 @@ function input(props) {
             </Link>
           </Grid>
           <Grid item>
-            <Link href={`/data?country=ID`}>
+            <Link href="/mobiledata/[country]" as="/mobiledata/ID">
               <a className={classes.link}>
                 <Paper className={classes.paper}>
                   <div>
@@ -101,7 +101,7 @@ function input(props) {
           </Grid>
           {/* // MALAYSIA */}
           <Grid item>
-            <Link href={`/prepaid?country=MY`}>
+            <Link href="/prepaid/[country]" as="/prepaid/MY">
               <a className={classes.link}>
                 <Paper className={classes.paper}>
                   <div>
@@ -116,7 +116,7 @@ function input(props) {
             </Link>
           </Grid>
           <Grid item>
-            <Link href={`/postpaid?country=MY`}>
+            <Link href="/postpaid/[country]" as="/postpaid/MY">
               <a className={classes.link}>
                 <Paper className={classes.paper}>
                   <div>
@@ -133,7 +133,7 @@ function input(props) {
             </Link>
           </Grid>
           <Grid item>
-            <Link href={`/billing?country=MY`}>
+            <Link href="/billing/[country]" as="/billing/MY">
               <a className={classes.link}>
                 <Paper className={classes.paper}>
                   <div>
