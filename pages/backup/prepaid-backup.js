@@ -17,7 +17,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Flag from "react-world-flags";
-import Confirm from "../component/ConfirmPurchase";
+// import Confirm from "../../component/ConfirmPurchase";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -116,7 +116,7 @@ function prepaid(props) {
 
   return (
     <div>
-      <Confirm
+      {/* <Confirm
         open={open}
         handleClose={() => setOpen(false)}
         data={{
@@ -124,7 +124,7 @@ function prepaid(props) {
           product: selectedProduct,
           denom: selectedDenom,
         }}
-      />
+      /> */}
       <div className={classes.title}>Prepaid - {country}</div>
       <Paper className={classes.paper}>
         <Grid container direction="column" spacing={2}>
