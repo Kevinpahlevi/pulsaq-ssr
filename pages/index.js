@@ -19,22 +19,22 @@ import Router, { withRouter } from "next/router";
 const useStyles = makeStyles((theme) => ({
   root: {},
   paper: {
-    width: "150px",
-    height: "150px",
-    borderRadius: "25px",
-    backgroundColor: "#2b87ff",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
+    width: "350px",
+    height: "50px",
+    borderRadius: "15px",
+    paddingTop: "10px",
+    border: "1px solid #2A87FF",
   },
   icon: {
-    fontSize: "100px",
-    color: "white",
+    fontSize: "30px",
+    color: "#2A87FF",
   },
   text: {
-    textAlign: "center",
-    width: "150px",
+    textAlign: "left",
+    fontWeight: "bold",
+    fontSize: "16px",
+    color: "#2A87FF",
+    paddingTop: "0px",
   },
   link: {
     textDecoration: "none",
@@ -65,20 +65,33 @@ function input(props) {
         <title>Home</title>
       </Head>
       <div>
-        <Grid container direction="row" justify="center" spacing={2}>
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          spacing={2}
+        >
           {/* Indonesia */}
           <Grid item>
             <Link href="/prepaid/[country]" as="/prepaid/ID">
               <a className={classes.link}>
                 <Paper className={classes.paper}>
-                  <div>
-                    <Flag code="ID" height="16" />
-                  </div>
-                  <div>
-                    <PhoneAndroidTwoToneIcon className={classes.icon} />
-                  </div>
+                  <Grid container direction="row" alignItems="center">
+                    <Grid item xs={3}>
+                      <Grid container direction="column" alignItems="center">
+                        <div>
+                          <PhoneAndroidTwoToneIcon className={classes.icon} />
+                        </div>
+                      </Grid>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.text}>
+                        Mobile Prepaid Indonesia
+                      </div>
+                    </Grid>
+                  </Grid>
                 </Paper>
-                <div className={classes.text}>Mobile Prepaid Indonesia</div>
               </a>
             </Link>
           </Grid>
@@ -86,16 +99,19 @@ function input(props) {
             <Link href="/mobiledata/[country]" as="/mobiledata/ID">
               <a className={classes.link}>
                 <Paper className={classes.paper}>
-                  <div>
-                    <Flag code="ID" height="16" />
-                  </div>
-                  <div>
-                    <WifiTwoToneIcon className={classes.icon} />
-                  </div>
+                  <Grid container direction="row" alignItems="center">
+                    <Grid item xs={3}>
+                      <Grid container direction="column" alignItems="center">
+                        <div>
+                          <WifiTwoToneIcon className={classes.icon} />
+                        </div>
+                      </Grid>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.text}>Mobile Data Indonesia</div>
+                    </Grid>
+                  </Grid>
                 </Paper>
-                <div className={classes.text}>
-                  Mobile Data <br></br>Indonesia
-                </div>
               </a>
             </Link>
           </Grid>
@@ -104,14 +120,21 @@ function input(props) {
             <Link href="/prepaid/[country]" as="/prepaid/MY">
               <a className={classes.link}>
                 <Paper className={classes.paper}>
-                  <div>
-                    <Flag code="MY" height="16" />
-                  </div>
-                  <div>
-                    <PhoneAndroidTwoToneIcon className={classes.icon} />
-                  </div>
+                  <Grid container direction="row" alignItems="center">
+                    <Grid item xs={3}>
+                      <Grid container direction="column" alignItems="center">
+                        <div>
+                          <PhoneAndroidTwoToneIcon className={classes.icon} />
+                        </div>
+                      </Grid>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.text}>
+                        Mobile Prepaid Malaysia
+                      </div>
+                    </Grid>
+                  </Grid>
                 </Paper>
-                <div className={classes.text}>Mobile Prepaid Malaysia</div>
               </a>
             </Link>
           </Grid>
@@ -119,16 +142,21 @@ function input(props) {
             <Link href="/postpaid/[country]" as="/postpaid/MY">
               <a className={classes.link}>
                 <Paper className={classes.paper}>
-                  <div>
-                    <Flag code="MY" height="16" />
-                  </div>
-                  <div>
-                    <PhoneInTalkTwoToneIcon className={classes.icon} />
-                  </div>
+                  <Grid container direction="row" alignItems="center">
+                    <Grid item xs={3}>
+                      <Grid container direction="column" alignItems="center">
+                        <div>
+                          <PhoneInTalkTwoToneIcon className={classes.icon} />
+                        </div>
+                      </Grid>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.text}>
+                        Mobile Postpaid Malaysia
+                      </div>
+                    </Grid>
+                  </Grid>
                 </Paper>
-                <div className={classes.text}>
-                  Mobile Postpaid <br></br>Malaysia
-                </div>
               </a>
             </Link>
           </Grid>
@@ -136,16 +164,23 @@ function input(props) {
             <Link href="/billing/[country]" as="/billing/MY">
               <a className={classes.link}>
                 <Paper className={classes.paper}>
-                  <div>
-                    <Flag code="MY" height="16" />
-                  </div>
-                  <div>
-                    <AccountBalanceWalletTwoToneIcon className={classes.icon} />
-                  </div>
+                  <Grid container direction="row" alignItems="center">
+                    <Grid item xs={3}>
+                      <Grid container direction="column" alignItems="center">
+                        <div>
+                          <AccountBalanceWalletTwoToneIcon
+                            className={classes.icon}
+                          />
+                        </div>
+                      </Grid>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.text}>
+                        Billing Payment Malaysia
+                      </div>
+                    </Grid>
+                  </Grid>
                 </Paper>
-                <div className={classes.text}>
-                  Billing Payment <br></br>Malaysia
-                </div>
               </a>
             </Link>
           </Grid>
