@@ -19,6 +19,8 @@ import Button from "@material-ui/core/Button";
 import Flag from "react-world-flags";
 import Confirm from "../../component/ConfirmPurchase";
 import Head from "next/head";
+import { connect } from "react-redux";
+import Router from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,12 +47,16 @@ function prepaid(props) {
   const [selectedProduct, setSelectedProduct] = React.useState({});
   const [selectedProductDenom, setSelectedProductDenom] = React.useState([]);
   const [selectedDenom, setSelectedDenom] = React.useState("");
+  const [selectedProductMY, setSelectedProductMY] = React.useState("");
 
-  const providerID = [
-    { signature: "89", name: "Three Indonesia topup", code: "three" },
-    { signature: "81", name: "Indosat Indonesia topup", code: "indosat" },
-    { signature: "88", name: "Smartfren Indonesia topup", code: "smartfren" },
-  ];
+  const providerID = {
+    tri: { name: "Three Indonesia topup", code: "three" },
+    isat: { name: "Indosat Indonesia topup", code: "indosat" },
+    smartfren: { name: "Smartfren Indonesia topup", code: "smartfren" },
+    tsel: { name: "Telkomsel Indonesia topup", code: "tsel" },
+    xl: { name: "XL Indonesia topup", code: "xl" },
+    axis: { name: "Axis Indonesia topup", code: "axis" },
+  };
 
   const providerMY = [
     { signature: "11", name: "Altel Malaysia topup", code: "altel" },
@@ -60,10 +66,14 @@ function prepaid(props) {
 
   const code = { ID: "+62", MY: "+60" };
   const denoID = {
-    three: ["IDR 5000", "IDR 10,000", "IDR 50,000"],
-    indosat: ["IDR 5000", "IDR 20,000", "IDR 50,000"],
+    tri: ["IDR 5000", "IDR 10,000", "IDR 50,000"],
+    isat: ["IDR 5000", "IDR 20,000", "IDR 50,000"],
     smartfren: ["IDR 5000", "IDR 15,000", "IDR 50,000", "IDR 100,000"],
+    tsel: ["IDR 5000", "IDR 10,000", "IDR 50,000"],
+    xl: ["IDR 5000", "IDR 20,000", "IDR 50,000"],
+    axis: ["IDR 5000", "IDR 15,000", "IDR 50,000", "IDR 100,000"],
   };
+
   const denoMY = {
     altel: ["MYR 5.00", "MYR 10.00"],
     buzzme: ["MYR 5.00", "MYR 10.00", "MYR 15.00"],
@@ -73,50 +83,48 @@ function prepaid(props) {
   React.useEffect(() => {
     if (country === "ID") {
       IDproduct();
-    } else if (country === "MY") {
-      MYproduct();
     }
   }, [phone]);
 
   const IDproduct = () => {
-    const regex = { three: /^89/, indosat: /^81/, smartfren: /^88/ };
-    if (regex.three.test(phone)) {
-      console.log("3");
-      setSelectedProduct(providerID[0]);
-      setSelectedProductDenom(denoID.three);
-    } else if (regex.indosat.test(phone)) {
-      console.log("indosat");
-      setSelectedProduct(providerID[1]);
-      setSelectedProductDenom(denoID.indosat);
-    } else if (regex.smartfren.test(phone)) {
-      console.log("smartfren");
-      setSelectedProduct(providerID[2]);
-      setSelectedProductDenom(denoID.smartfren);
-    } else {
-      setSelectedProduct({});
-      setSelectedProductDenom([]);
+    let finalKey = null;
+    if (/^8[125]{1}[123]{1}/gim.test(phone)) finalKey = "tsel";
+    else if (/^8(?:[15]{1}[56]{1}|5[78]{1}|14)/gim.test(phone))
+      finalKey = "isat";
+    else if (/^8(?:[17]{1}[789]{1}|59[^18])/gim.test(phone)) finalKey = "xl";
+    else if (/^8(?:3[1238]{1}|59[18])/gim.test(phone)) finalKey = "axis";
+    else if (/^89[5-9]{1}/gim.test(phone)) finalKey = "tri";
+    else if (/^88[1-9]{1}/gim.test(phone)) finalKey = "smartfren";
+    else {
+      finalKey = null;
     }
-  };
 
-  const MYproduct = () => {
-    const regex = { altel: /^11/, buzzme: /^22/, celcom: /^33/ };
-    if (regex.altel.test(phone)) {
-      setSelectedProduct(providerMY[0]);
-      setSelectedProductDenom(denoMY.altel);
-    } else if (regex.buzzme.test(phone)) {
-      setSelectedProduct(providerMY[1]);
-      setSelectedProductDenom(denoMY.buzzme);
-    } else if (regex.celcom.test(phone)) {
-      setSelectedProduct(providerMY[2]);
-      setSelectedProductDenom(denoMY.celcom);
-    } else {
+    if (finalKey === null) {
+      console.log("null");
       setSelectedProduct({});
       setSelectedProductDenom([]);
+    } else {
+      console.log("ada");
+      setSelectedProduct(providerID[finalKey]);
+      setSelectedProductDenom(denoID[finalKey]);
     }
   };
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const isConfirm = () => {
+    const { addPayment } = props;
+    addPayment({
+      country: country,
+      type: "prepaid",
+      selectedProduct,
+      selectedDenom,
+      phone,
+    });
+    setOpen(false);
+    Router.push("/payment");
   };
 
   return (
@@ -132,6 +140,7 @@ function prepaid(props) {
           product: selectedProduct,
           denom: selectedDenom,
         }}
+        confirm={isConfirm}
       />
       <div className={classes.title}>Prepaid - {country}</div>
       <Paper className={classes.paper}>
@@ -159,19 +168,45 @@ function prepaid(props) {
             </FormControl>
           </Grid>
           <Grid item>
-            <TextField
-              fullWidth
-              id="outlined-basic"
-              label="Product"
-              value={selectedProduct.name || ""}
-              placeholder="Insert Phone / Bill Number"
-              InputProps={{
-                readOnly: true,
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
+            {country === "ID" ? (
+              <TextField
+                fullWidth
+                id="outlined-basic"
+                label="Product"
+                value={selectedProduct.name || ""}
+                placeholder="Insert Phone / Bill Number"
+                InputProps={{
+                  readOnly: true,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            ) : (
+              <FormControl fullWidth className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">Product</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={selectedProductMY}
+                  onChange={(e) => {
+                    console.log(e.target);
+                    setSelectedProductMY(e.target.value);
+                    const index = providerMY.findIndex(
+                      (x) => x.code === e.target.value
+                    );
+                    setSelectedProduct(providerMY[index]);
+                    setSelectedProductDenom(denoMY[e.target.value]);
+                  }}
+                >
+                  {providerMY.map((item, index) => (
+                    <MenuItem value={item.code} key={index} name={index}>
+                      {item.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            )}
           </Grid>
           <Grid item>
             <FormControl fullWidth className={classes.formControl}>
@@ -230,4 +265,28 @@ export async function getStaticPaths() {
   };
 }
 
-export default withRouter(prepaid);
+const mapStateToProps = (state) => {
+  return {
+    count: state.count,
+    name: state.name,
+    payment: state.payment,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addCountAction: () => {
+      dispatch({ type: "ADD_COUNT" });
+    },
+    changeNameAction: (name) => {
+      dispatch({ type: "CHANGE_NAME", value: name });
+    },
+    addPayment: (payment) => {
+      dispatch({ type: "ADD_PAYMENT", value: payment });
+    },
+  };
+};
+
+const prepaidPage = connect(mapStateToProps, mapDispatchToProps)(prepaid);
+
+export default withRouter(prepaidPage);

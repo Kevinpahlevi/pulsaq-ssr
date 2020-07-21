@@ -1,6 +1,7 @@
 const initState = {
   count: 100,
   name: "init",
+  payment: {},
 };
 
 const reducer = (state = initState, action) => {
@@ -14,6 +15,8 @@ const reducer = (state = initState, action) => {
       return { ...state, name: value };
     case "GET_COUNT":
       return state.count;
+    case "ADD_PAYMENT":
+      return { ...state, payment: value };
     default:
       return state;
   }

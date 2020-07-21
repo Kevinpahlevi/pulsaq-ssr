@@ -23,17 +23,17 @@ const useStyles = makeStyles((theme) => ({
     height: "50px",
     borderRadius: "15px",
     paddingTop: "10px",
-    border: "1px solid #2A87FF",
+    border: "1px solid #FF2600",
   },
   icon: {
     fontSize: "30px",
-    color: "#2A87FF",
+    color: "#FF2600",
   },
   text: {
     textAlign: "left",
     fontWeight: "bold",
     fontSize: "16px",
-    color: "#2A87FF",
+    color: "#FF2600",
     paddingTop: "0px",
   },
   link: {

@@ -5,8 +5,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Barcode from "react-barcode";
 
-export default function AlertDialog({ open, handleClose, confirm, data }) {
+export default function AlertDialog({ open, handleClose, type }) {
   return (
     <div>
       <Dialog
@@ -14,26 +15,23 @@ export default function AlertDialog({ open, handleClose, confirm, data }) {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        fullScreen
       >
-        <DialogTitle id="alert-dialog-title">{"Confirm Purchase"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Payment Barcode"}</DialogTitle>
         <DialogContent>
-          {/* <DialogContentText id="alert-dialog-description"></DialogContentText> */}
-          <div>{data.product.name}</div>
-          <div>{data.denom}</div>
-          <div>{data.target}</div>
+          <DialogContentText id="alert-dialog-description">
+            Bayar di outlet {type} terdekat dengan scan barcode dibawah ini.
+          </DialogContentText>
+          <Barcode
+            value="id-pulsaq-order-prepaid"
+            width={1}
+            height={100}
+            displayValue={false}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button
-            onClick={handleClose}
-            color="primary"
-            autoFocus
-            variant="contained"
-            onClick={confirm}
-          >
-            Continue
+            Close
           </Button>
         </DialogActions>
       </Dialog>

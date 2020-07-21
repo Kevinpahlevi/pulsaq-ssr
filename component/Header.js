@@ -125,7 +125,10 @@ export default function ButtonAppBar() {
               fontWeight: "bold",
             }}
           >
-            PulsaQ
+            <img
+              src="/logo_pulsa_fix.png"
+              style={{ width: "250px", height: "110px" }}
+            />
           </a>
         </Link>
       </div>
