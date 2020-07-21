@@ -15,31 +15,49 @@ import AccountBalanceWalletTwoToneIcon from "@material-ui/icons/AccountBalanceWa
 import PhoneInTalkTwoToneIcon from "@material-ui/icons/PhoneInTalkTwoTone";
 import Flag from "react-world-flags";
 import Router, { withRouter } from "next/router";
+import ConfirmationNumberTwoToneIcon from "@material-ui/icons/ConfirmationNumberTwoTone";
+import FlashOnTwoToneIcon from "@material-ui/icons/FlashOnTwoTone";
+import LocalHospitalTwoToneIcon from "@material-ui/icons/LocalHospitalTwoTone";
+import LocalDrinkTwoToneIcon from "@material-ui/icons/LocalDrinkTwoTone";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
   paper: {
     width: "350px",
-    height: "50px",
-    borderRadius: "15px",
-    paddingTop: "10px",
-    border: "1px solid #FF2600",
+    height: "150px",
+    padding: "12px",
+    marginBottom: "20px",
   },
   icon: {
-    fontSize: "30px",
-    color: "#FF2600",
+    fontSize: "60px",
+    color: "#54C5F5",
   },
   text: {
-    textAlign: "left",
     fontWeight: "bold",
-    fontSize: "16px",
-    color: "#FF2600",
-    paddingTop: "0px",
+    fontSize: "15px",
   },
   link: {
     textDecoration: "none",
     color: "black",
     cursor: "pointer",
+  },
+  overflowWrap: {
+    width: "100%",
+    overflowX: "scroll",
+    whiteSpace: "nowrap",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
+    "-ms-overflow-style": "none" /* Internet Explorer 10+ */,
+    "scrollbar-width": "none" /* Firefox */,
+  },
+  itemWrap: {
+    width: "80px",
+    height: "100px",
+    display: "inline-block",
+  },
+  textIcon: {
+    fontWeight: "bold",
   },
 }));
 
@@ -64,128 +82,280 @@ function input(props) {
       <Head>
         <title>Home</title>
       </Head>
-      <div>
-        <Grid
-          container
-          direction="column"
-          justify="center"
-          alignItems="center"
-          spacing={2}
+      {/* <div
+        style={{
+          width: "300px",
+          height: "100px",
+          backgroundColor: "#333",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            width: "300px",
+            height: "100px",
+            backgroundColor: "#333",
+            overflow: "auto",
+            whiteSpace: "nowrap",
+          }}
         >
-          {/* Indonesia */}
-          <Grid item>
-            <Link href="/prepaid/[country]" as="/prepaid/ID">
-              <a className={classes.link}>
-                <Paper className={classes.paper}>
-                  <Grid container direction="row" alignItems="center">
-                    <Grid item xs={3}>
+          <div
+            style={{
+              width: "100px",
+              height: "100px",
+              background: "red",
+              display: "inline-block",
+            }}
+          >
+            aa
+          </div>
+          <div
+            style={{
+              width: "100px",
+              height: "100px",
+              background: "red",
+              display: "inline-block",
+            }}
+          >
+            aa
+          </div>
+          <div
+            style={{
+              width: "100px",
+              height: "100px",
+              background: "red",
+              display: "inline-block",
+            }}
+          >
+            aa
+          </div>
+          <div
+            style={{
+              width: "100px",
+              height: "100px",
+              background: "red",
+              display: "inline-block",
+            }}
+          >
+            aa
+          </div>
+          <div
+            style={{
+              width: "100px",
+              height: "100px",
+              background: "red",
+              display: "inline-block",
+            }}
+          >
+            aa
+          </div>
+          <div
+            style={{
+              width: "100px",
+              height: "100px",
+              background: "red",
+              display: "inline-block",
+            }}
+          >
+            bb
+          </div>
+        </div> */}
+      <Grid container direction="column" alignItems="center">
+        <Paper className={classes.paper}>
+          <Grid container direction="column" style={{ width: "100%" }}>
+            <Grid item>
+              <Grid container direction="column">
+                <div className={classes.text}>Indonesia</div>
+              </Grid>
+            </Grid>
+            <Grid item style={{ width: "100%", marginTop: "10px" }}>
+              <div className={classes.overflowWrap} id="scrollMe">
+                <Link href="/prepaid/[country]" as="/prepaid/ID">
+                  <a className={classes.link}>
+                    <div className={classes.itemWrap}>
                       <Grid container direction="column" alignItems="center">
-                        <div>
+                        <Grid item>
                           <PhoneAndroidTwoToneIcon className={classes.icon} />
-                        </div>
+                        </Grid>
+                        <Grid item className={classes.textIcon}>
+                          Isi Pulsa
+                        </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid item>
-                      <div className={classes.text}>
-                        Mobile Prepaid Indonesia
-                      </div>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              </a>
-            </Link>
-          </Grid>
-          <Grid item>
-            <Link href="/mobiledata/[country]" as="/mobiledata/ID">
-              <a className={classes.link}>
-                <Paper className={classes.paper}>
-                  <Grid container direction="row" alignItems="center">
-                    <Grid item xs={3}>
+                    </div>
+                  </a>
+                </Link>
+                <Link href="/data/[country]" as="/data/ID">
+                  <a className={classes.link}>
+                    <div className={classes.itemWrap}>
                       <Grid container direction="column" alignItems="center">
-                        <div>
+                        <Grid item>
                           <WifiTwoToneIcon className={classes.icon} />
-                        </div>
+                        </Grid>
+                        <Grid item className={classes.textIcon}>
+                          Paket Data
+                        </Grid>
                       </Grid>
-                    </Grid>
+                    </div>
+                  </a>
+                </Link>
+                <div className={classes.itemWrap}>
+                  <Grid container direction="column" alignItems="center">
                     <Grid item>
-                      <div className={classes.text}>Mobile Data Indonesia</div>
+                      <ConfirmationNumberTwoToneIcon className={classes.icon} />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      Voucher
                     </Grid>
                   </Grid>
-                </Paper>
-              </a>
-            </Link>
+                </div>
+                <div className={classes.itemWrap}>
+                  <Grid container direction="column" alignItems="center">
+                    <Grid item>
+                      <FlashOnTwoToneIcon className={classes.icon} />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      Token PLN
+                    </Grid>
+                  </Grid>
+                </div>
+                <div className={classes.itemWrap}>
+                  <Grid container direction="column" alignItems="center">
+                    <Grid item>
+                      <LocalHospitalTwoToneIcon className={classes.icon} />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      BPJS
+                    </Grid>
+                  </Grid>
+                </div>
+                <div className={classes.itemWrap}>
+                  <Grid container direction="column" alignItems="center">
+                    <Grid item>
+                      <LocalDrinkTwoToneIcon className={classes.icon} />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      PDAM
+                    </Grid>
+                  </Grid>
+                </div>
+                <div className={classes.itemWrap}>
+                  <Grid container direction="column" alignItems="center">
+                    <Grid item>
+                      <AccountBalanceWalletTwoToneIcon
+                        className={classes.icon}
+                      />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      e-Money
+                    </Grid>
+                  </Grid>
+                </div>
+              </div>
+            </Grid>
           </Grid>
-          {/* // MALAYSIA */}
-          <Grid item>
-            <Link href="/prepaid/[country]" as="/prepaid/MY">
-              <a className={classes.link}>
-                <Paper className={classes.paper}>
-                  <Grid container direction="row" alignItems="center">
-                    <Grid item xs={3}>
+        </Paper>
+
+        {/* MALAYSIA */}
+        <Paper className={classes.paper}>
+          <Grid container direction="column" style={{ width: "100%" }}>
+            <Grid item>
+              <Grid container direction="column">
+                <div className={classes.text}>Malaysia</div>
+              </Grid>
+            </Grid>
+            <Grid item style={{ width: "100%", marginTop: "10px" }}>
+              <div className={classes.overflowWrap}>
+                <Link href="/prepaid/[country]" as="/prepaid/MY">
+                  <a className={classes.link}>
+                    <div className={classes.itemWrap}>
                       <Grid container direction="column" alignItems="center">
-                        <div>
+                        <Grid item>
                           <PhoneAndroidTwoToneIcon className={classes.icon} />
-                        </div>
+                        </Grid>
+                        <Grid item className={classes.textIcon}>
+                          Isi Pulsa
+                        </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid item>
-                      <div className={classes.text}>
-                        Mobile Prepaid Malaysia
-                      </div>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              </a>
-            </Link>
-          </Grid>
-          <Grid item>
-            <Link href="/postpaid/[country]" as="/postpaid/MY">
-              <a className={classes.link}>
-                <Paper className={classes.paper}>
-                  <Grid container direction="row" alignItems="center">
-                    <Grid item xs={3}>
+                    </div>
+                  </a>
+                </Link>
+                <Link href="/postpaid/[country]" as="/postpaid/MY">
+                  <a className={classes.link}>
+                    <div className={classes.itemWrap}>
                       <Grid container direction="column" alignItems="center">
-                        <div>
+                        <Grid item>
                           <PhoneInTalkTwoToneIcon className={classes.icon} />
-                        </div>
+                        </Grid>
+                        <Grid item className={classes.textIcon}>
+                          Postpaid
+                        </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid item>
-                      <div className={classes.text}>
-                        Mobile Postpaid Malaysia
-                      </div>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              </a>
-            </Link>
-          </Grid>
-          <Grid item>
-            <Link href="/billing/[country]" as="/billing/MY">
-              <a className={classes.link}>
-                <Paper className={classes.paper}>
-                  <Grid container direction="row" alignItems="center">
-                    <Grid item xs={3}>
+                    </div>
+                  </a>
+                </Link>
+                <Link href="/postpaid/[country]" as="/postpaid/MY">
+                  <a className={classes.link}>
+                    <div className={classes.itemWrap}>
                       <Grid container direction="column" alignItems="center">
-                        <div>
+                        <Grid item>
                           <AccountBalanceWalletTwoToneIcon
                             className={classes.icon}
                           />
-                        </div>
+                        </Grid>
+                        <Grid item className={classes.textIcon}>
+                          Billing
+                        </Grid>
                       </Grid>
-                    </Grid>
+                    </div>
+                  </a>
+                </Link>
+              </div>
+            </Grid>
+          </Grid>
+        </Paper>
+
+        {/* INTERNASIONAL */}
+        <Paper className={classes.paper}>
+          <Grid container direction="column" style={{ width: "100%" }}>
+            <Grid item>
+              <Grid container direction="column">
+                <div className={classes.text}>Internasional</div>
+              </Grid>
+            </Grid>
+            <Grid item style={{ width: "100%", marginTop: "10px" }}>
+              <div className={classes.overflowWrap}>
+                <Link href="/prepaid/[country]" as="/prepaid/ID">
+                  <a className={classes.link}>
+                    <div className={classes.itemWrap}>
+                      <Grid container direction="column" alignItems="center">
+                        <Grid item>
+                          <PhoneAndroidTwoToneIcon className={classes.icon} />
+                        </Grid>
+                        <Grid item className={classes.textIcon}>
+                          Isi Pulsa
+                        </Grid>
+                      </Grid>
+                    </div>
+                  </a>
+                </Link>
+                <div className={classes.itemWrap}>
+                  <Grid container direction="column" alignItems="center">
                     <Grid item>
-                      <div className={classes.text}>
-                        Billing Payment Malaysia
-                      </div>
+                      <AccountBalanceWalletTwoToneIcon
+                        className={classes.icon}
+                      />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      Prepaid
                     </Grid>
                   </Grid>
-                </Paper>
-              </a>
-            </Link>
+                </div>
+              </div>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
+        </Paper>
+      </Grid>
+      {/* </div> */}
     </React.Fragment>
   );
 }
