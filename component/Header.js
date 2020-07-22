@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "center",
-    margin: "15px",
+    marginBottom: "10px",
   },
   menuButton: {
     marginRight: theme.spacing(2),

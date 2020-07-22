@@ -7,6 +7,8 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../lib/theme.js";
 import Container from "@material-ui/core/Container";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function MyApp(props) {
   const { Component, pageProps } = props;

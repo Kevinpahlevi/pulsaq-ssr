@@ -19,16 +19,46 @@ import ConfirmationNumberTwoToneIcon from "@material-ui/icons/ConfirmationNumber
 import FlashOnTwoToneIcon from "@material-ui/icons/FlashOnTwoTone";
 import LocalHospitalTwoToneIcon from "@material-ui/icons/LocalHospitalTwoTone";
 import LocalDrinkTwoToneIcon from "@material-ui/icons/LocalDrinkTwoTone";
+import Slider from "react-slick";
+
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  arrows: false,
+  autoplaySpeed: 2000,
+  lazyLoad: true,
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {},
   paper: {
     width: "350px",
+    "@media screen and (max-width: 450px)": {
+      width: "100%",
+    },
     height: "150px",
     padding: "12px",
     marginBottom: "20px",
     border: "3px solid #54c5f5",
     borderRadius: "10px",
+  },
+  slider: {
+    width: "350px",
+    "@media screen and (max-width: 450px)": {
+      width: "100%",
+    },
+    marginBottom: "20px",
+    " & .slick-prev:before": {
+      color: "black",
+    },
+    "& .slick-next:before": {
+      color: "black",
+    },
+    marginBottom: "30px",
   },
   icon: {
     fontSize: "60px",
@@ -84,85 +114,24 @@ function input(props) {
       <Head>
         <title>Home</title>
       </Head>
-      {/* <div
-        style={{
-          width: "300px",
-          height: "100px",
-          backgroundColor: "#333",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            width: "300px",
-            height: "100px",
-            backgroundColor: "#333",
-            overflow: "auto",
-            whiteSpace: "nowrap",
-          }}
-        >
-          <div
-            style={{
-              width: "100px",
-              height: "100px",
-              background: "red",
-              display: "inline-block",
-            }}
-          >
-            aa
-          </div>
-          <div
-            style={{
-              width: "100px",
-              height: "100px",
-              background: "red",
-              display: "inline-block",
-            }}
-          >
-            aa
-          </div>
-          <div
-            style={{
-              width: "100px",
-              height: "100px",
-              background: "red",
-              display: "inline-block",
-            }}
-          >
-            aa
-          </div>
-          <div
-            style={{
-              width: "100px",
-              height: "100px",
-              background: "red",
-              display: "inline-block",
-            }}
-          >
-            aa
-          </div>
-          <div
-            style={{
-              width: "100px",
-              height: "100px",
-              background: "red",
-              display: "inline-block",
-            }}
-          >
-            aa
-          </div>
-          <div
-            style={{
-              width: "100px",
-              height: "100px",
-              background: "red",
-              display: "inline-block",
-            }}
-          >
-            bb
-          </div>
-        </div> */}
+
       <Grid container direction="column" alignItems="center">
+        <div className={classes.slider}>
+          <Slider {...settings}>
+            <div>
+              <img src="https://via.placeholder.com/350x150/ff2600/FFFFFF/?text=adv1" />
+            </div>
+            <div>
+              <img src="https://via.placeholder.com/350x150/ff2600/FFFFFF/?text=adv2" />
+            </div>
+            <div>
+              <img src="https://via.placeholder.com/350x150/ff2600/FFFFFF/?text=adv3" />
+            </div>
+            <div>
+              <img src="https://via.placeholder.com/350x150/ff2600/FFFFFF/?text=adv4" />
+            </div>
+          </Slider>
+        </div>
         <Paper className={classes.paper}>
           <Grid container direction="column" style={{ width: "100%" }}>
             <Grid item>
@@ -380,18 +349,18 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export async function getStaticProps() {
-  // Call an external API endpoint to get posts
-  const res = await axios.get("https://jsonplaceholder.typicode.com/todos/1");
+// export async function getStaticProps() {
+//   // Call an external API endpoint to get posts
+//   const res = await axios.get("https://jsonplaceholder.typicode.com/todos/1");
 
-  // By returning { props: posts }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {
-      test: res.data,
-    },
-  };
-}
+//   // By returning { props: posts }, the Blog component
+//   // will receive `posts` as a prop at build time
+//   return {
+//     props: {
+//       test: res.data,
+//     },
+//   };
+// }
 
 const edit = connect(mapStateToProps, mapDispatchToProps)(input);
 export default withRouter(edit);
