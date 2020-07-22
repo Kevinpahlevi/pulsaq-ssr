@@ -41,10 +41,13 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
     },
     height: "150px",
-    padding: "12px",
+    padding: "12px 0px 12px 12px",
     marginBottom: "20px",
     border: "3px solid #54c5f5",
     borderRadius: "10px",
+  },
+  imgSlide: {
+    width: "100%",
   },
   slider: {
     width: "350px",
@@ -58,7 +61,10 @@ const useStyles = makeStyles((theme) => ({
     "& .slick-next:before": {
       color: "black",
     },
-    marginBottom: "30px",
+    "& .slick-dots": {
+      bottom: "10px",
+    },
+    marginBottom: "10px",
   },
   icon: {
     fontSize: "60px",
@@ -119,16 +125,28 @@ function input(props) {
         <div className={classes.slider}>
           <Slider {...settings}>
             <div>
-              <img src="https://via.placeholder.com/350x150/ff2600/FFFFFF/?text=adv1" />
+              <img
+                src="https://via.placeholder.com/350x150/ff2600/FFFFFF/?text=adv1"
+                className={classes.imgSlide}
+              />
             </div>
             <div>
-              <img src="https://via.placeholder.com/350x150/ff2600/FFFFFF/?text=adv2" />
+              <img
+                src="https://via.placeholder.com/350x150/ff2600/FFFFFF/?text=adv2"
+                className={classes.imgSlide}
+              />
             </div>
             <div>
-              <img src="https://via.placeholder.com/350x150/ff2600/FFFFFF/?text=adv3" />
+              <img
+                src="https://via.placeholder.com/350x150/ff2600/FFFFFF/?text=adv3"
+                className={classes.imgSlide}
+              />
             </div>
             <div>
-              <img src="https://via.placeholder.com/350x150/ff2600/FFFFFF/?text=adv4" />
+              <img
+                src="https://via.placeholder.com/350x150/ff2600/FFFFFF/?text=adv4"
+                className={classes.imgSlide}
+              />
             </div>
           </Slider>
         </div>
