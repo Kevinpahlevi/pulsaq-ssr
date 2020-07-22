@@ -27,10 +27,12 @@ const useStyles = makeStyles((theme) => ({
     height: "150px",
     padding: "12px",
     marginBottom: "20px",
+    border: "3px solid #54c5f5",
+    borderRadius: "10px",
   },
   icon: {
     fontSize: "60px",
-    color: "#54C5F5",
+    color: "#FF2600",
   },
   text: {
     fontWeight: "bold",
