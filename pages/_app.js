@@ -22,7 +22,7 @@ function MyApp(props) {
   }, []);
 
   return (
-    <React.Fragment>
+    <div style={{ background: "#f9f9f9" }}>
       <Head>
         <title>My page</title>
         <meta
@@ -37,7 +37,7 @@ function MyApp(props) {
           <Component {...pageProps} />
         </Container>
       </ThemeProvider>
-    </React.Fragment>
+    </div>
   );
 }
 export default wrapper.withRedux(MyApp);

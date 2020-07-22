@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "center",
-    marginBottom: "10px",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -126,7 +125,7 @@ export default function ButtonAppBar() {
             }}
           >
             <img
-              src="/logo_pulsa_fix.png"
+              src="/logo_pulsa_nobg.png"
               style={{ width: "250px", height: "110px" }}
             />
           </a>

@@ -43,11 +43,11 @@ const useStyles = makeStyles((theme) => ({
     height: "150px",
     padding: "12px 0px 12px 12px",
     marginBottom: "20px",
-    border: "3px solid #54c5f5",
     borderRadius: "10px",
   },
   imgSlide: {
     width: "100%",
+    borderRadius: "10px",
   },
   slider: {
     width: "350px",
@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
       bottom: "10px",
     },
     marginBottom: "10px",
+    marginTop: "-20px",
   },
   icon: {
     fontSize: "60px",
