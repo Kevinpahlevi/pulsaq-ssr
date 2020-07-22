@@ -286,7 +286,7 @@ function input(props) {
                     </div>
                   </a>
                 </Link>
-                <Link href="/postpaid/[country]" as="/postpaid/MY">
+                <Link href="/billing/[country]" as="/billing/MY">
                   <a className={classes.link}>
                     <div className={classes.itemWrap}>
                       <Grid container direction="column" alignItems="center">
@@ -317,20 +317,16 @@ function input(props) {
             </Grid>
             <Grid item style={{ width: "100%", marginTop: "10px" }}>
               <div className={classes.overflowWrap}>
-                <Link href="/prepaid/[country]" as="/prepaid/ID">
-                  <a className={classes.link}>
-                    <div className={classes.itemWrap}>
-                      <Grid container direction="column" alignItems="center">
-                        <Grid item>
-                          <PhoneAndroidTwoToneIcon className={classes.icon} />
-                        </Grid>
-                        <Grid item className={classes.textIcon}>
-                          Isi Pulsa
-                        </Grid>
-                      </Grid>
-                    </div>
-                  </a>
-                </Link>
+                <div className={classes.itemWrap}>
+                  <Grid container direction="column" alignItems="center">
+                    <Grid item>
+                      <PhoneAndroidTwoToneIcon className={classes.icon} />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      Isi Pulsa
+                    </Grid>
+                  </Grid>
+                </div>
                 <div className={classes.itemWrap}>
                   <Grid container direction="column" alignItems="center">
                     <Grid item>

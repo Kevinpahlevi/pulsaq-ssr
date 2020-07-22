@@ -142,9 +142,9 @@ function prepaid(props) {
         }}
         confirm={isConfirm}
       />
-      <div className={classes.title}>Prepaid - {country}</div>
       <Paper className={classes.paper}>
         <Grid container direction="column" spacing={2}>
+          <div className={classes.title}>Prepaid - {country}</div>
           <Grid item>
             <FormControl fullWidth variant="outlined">
               <InputLabel htmlFor="outlined-adornment-amount">
