@@ -46,8 +46,11 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "10px",
   },
   imgSlide: {
-    width: "100%",
+    width: "98%",
     borderRadius: "10px",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   slider: {
     width: "350px",

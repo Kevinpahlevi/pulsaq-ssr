@@ -22,7 +22,7 @@ function MyApp(props) {
   }, []);
 
   return (
-    <div style={{ background: "#f9f9f9" }}>
+    <div style={{ background: "#f7f7f7", height: "100%" }}>
       <Head>
         <title>My page</title>
         <meta
