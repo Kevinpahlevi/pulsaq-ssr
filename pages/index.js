@@ -155,7 +155,7 @@ function input(props) {
                     </div>
                   </a>
                 </Link>
-                <Link href="/data/[country]" as="/data/ID">
+                <Link href="/mobiledata/[country]" as="/mobiledata/ID">
                   <a className={classes.link}>
                     <div className={classes.itemWrap}>
                       <Grid container direction="column" alignItems="center">
