@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
       bottom: "10px",
     },
     marginBottom: "10px",
-    marginTop: "-20px",
+    marginTop: "20px",
   },
   icon: {
     fontSize: "60px",
@@ -98,8 +98,18 @@ const useStyles = makeStyles((theme) => ({
     height: "100px",
     display: "inline-block",
   },
+  itemWrapFlag: {
+    width: "90px",
+    height: "100px",
+    display: "inline-block",
+  },
   textIcon: {
     fontWeight: "bold",
+  },
+  imgIcon: {
+    width: "70px",
+    height: "70px",
+    borderRadius: "10px",
   },
 }));
 
@@ -258,50 +268,60 @@ function input(props) {
             </Grid>
             <Grid item style={{ width: "100%", marginTop: "10px" }}>
               <div className={classes.overflowWrap}>
-                <Link href="/prepaid/[country]" as="/prepaid/MY">
-                  <a className={classes.link}>
-                    <div className={classes.itemWrap}>
-                      <Grid container direction="column" alignItems="center">
-                        <Grid item>
-                          <PhoneAndroidTwoToneIcon className={classes.icon} />
-                        </Grid>
-                        <Grid item className={classes.textIcon}>
-                          Isi Pulsa
-                        </Grid>
-                      </Grid>
-                    </div>
-                  </a>
-                </Link>
-                <Link href="/postpaid/[country]" as="/postpaid/MY">
-                  <a className={classes.link}>
-                    <div className={classes.itemWrap}>
-                      <Grid container direction="column" alignItems="center">
-                        <Grid item>
-                          <PhoneInTalkTwoToneIcon className={classes.icon} />
-                        </Grid>
-                        <Grid item className={classes.textIcon}>
-                          Postpaid
-                        </Grid>
-                      </Grid>
-                    </div>
-                  </a>
-                </Link>
-                <Link href="/billing/[country]" as="/billing/MY">
-                  <a className={classes.link}>
-                    <div className={classes.itemWrap}>
-                      <Grid container direction="column" alignItems="center">
-                        <Grid item>
-                          <AccountBalanceWalletTwoToneIcon
-                            className={classes.icon}
-                          />
-                        </Grid>
-                        <Grid item className={classes.textIcon}>
-                          Billing
-                        </Grid>
-                      </Grid>
-                    </div>
-                  </a>
-                </Link>
+                <div className={classes.itemWrap}>
+                  <Grid container direction="column" alignItems="center">
+                    <Grid item>
+                      <img src="/digi.png" className={classes.imgIcon} />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      Digi
+                    </Grid>
+                  </Grid>
+                </div>
+
+                <div className={classes.itemWrap}>
+                  <Grid container direction="column" alignItems="center">
+                    <Grid item>
+                      <img src="/hotlink.png" className={classes.imgIcon} />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      Hotlink
+                    </Grid>
+                  </Grid>
+                </div>
+
+                <div className={classes.itemWrap}>
+                  <Grid container direction="column" alignItems="center">
+                    <Grid item>
+                      <img src="/maxis.png" className={classes.imgIcon} />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      Maxis
+                    </Grid>
+                  </Grid>
+                </div>
+
+                <div className={classes.itemWrap}>
+                  <Grid container direction="column" alignItems="center">
+                    <Grid item>
+                      <img src="/celcom.jpg" className={classes.imgIcon} />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      Celcom
+                    </Grid>
+                  </Grid>
+                </div>
+
+                <div className={classes.itemWrap}>
+                  <Grid container direction="column" alignItems="center">
+                    <Grid item>
+                      <img src="/umobile.png" className={classes.imgIcon} />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      Umobile
+                    </Grid>
+                  </Grid>
+                </div>
               </div>
             </Grid>
           </Grid>
@@ -317,25 +337,43 @@ function input(props) {
             </Grid>
             <Grid item style={{ width: "100%", marginTop: "10px" }}>
               <div className={classes.overflowWrap}>
-                <div className={classes.itemWrap}>
+                <div className={classes.itemWrapFlag}>
                   <Grid container direction="column" alignItems="center">
                     <Grid item>
-                      <PhoneAndroidTwoToneIcon className={classes.icon} />
+                      <Flag code="BD" height="60" width="75" />
                     </Grid>
                     <Grid item className={classes.textIcon}>
-                      Isi Pulsa
+                      Bangladesh
                     </Grid>
                   </Grid>
                 </div>
-                <div className={classes.itemWrap}>
+                <div className={classes.itemWrapFlag}>
                   <Grid container direction="column" alignItems="center">
                     <Grid item>
-                      <AccountBalanceWalletTwoToneIcon
-                        className={classes.icon}
-                      />
+                      <Flag code="NPL" height="60" width="75" />
                     </Grid>
                     <Grid item className={classes.textIcon}>
-                      Prepaid
+                      Nepal
+                    </Grid>
+                  </Grid>
+                </div>
+                <div className={classes.itemWrapFlag}>
+                  <Grid container direction="column" alignItems="center">
+                    <Grid item>
+                      <Flag code="PH" height="60" width="75" />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      Phillippines
+                    </Grid>
+                  </Grid>
+                </div>
+                <div className={classes.itemWrapFlag}>
+                  <Grid container direction="column" alignItems="center">
+                    <Grid item>
+                      <Flag code="MMR" height="60" width="75" />
+                    </Grid>
+                    <Grid item className={classes.textIcon}>
+                      Myanmar
                     </Grid>
                   </Grid>
                 </div>

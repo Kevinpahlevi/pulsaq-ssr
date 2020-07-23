@@ -31,7 +31,7 @@ function MyApp(props) {
         />
       </Head>
       <ThemeProvider theme={theme}>
-        <Header />
+        {/* <Header /> */}
         <CssBaseline />
         <Container style={{ marginTop: "10px" }}>
           <Component {...pageProps} />
