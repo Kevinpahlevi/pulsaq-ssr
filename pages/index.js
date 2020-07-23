@@ -139,16 +139,16 @@ function input(props) {
         <div className={classes.slider}>
           <Slider {...settings}>
             <div>
-              <img src="/adv1.png" className={classes.imgSlide} />
+              <img src="/img1.png" className={classes.imgSlide} />
             </div>
             <div>
-              <img src="/adv2.png" className={classes.imgSlide} />
+              <img src="/img2.png" className={classes.imgSlide} />
             </div>
             <div>
-              <img src="/adv3.png" className={classes.imgSlide} />
+              <img src="/img3.png" className={classes.imgSlide} />
             </div>
             <div>
-              <img src="/adv4.png" className={classes.imgSlide} />
+              <img src="/img4.png" className={classes.imgSlide} />
             </div>
           </Slider>
         </div>
