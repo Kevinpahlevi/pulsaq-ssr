@@ -139,16 +139,16 @@ function input(props) {
         <div className={classes.slider}>
           <Slider {...settings}>
             <div>
-              <img src="/img1.png" className={classes.imgSlide} />
+              <img src="/carousel/img1.png" className={classes.imgSlide} />
             </div>
             <div>
-              <img src="/img2.png" className={classes.imgSlide} />
+              <img src="/carousel/img2.png" className={classes.imgSlide} />
             </div>
             <div>
-              <img src="/img3.png" className={classes.imgSlide} />
+              <img src="/carousel/img3.png" className={classes.imgSlide} />
             </div>
             <div>
-              <img src="/img4.png" className={classes.imgSlide} />
+              <img src="/carousel/img4.png" className={classes.imgSlide} />
             </div>
           </Slider>
         </div>
@@ -161,7 +161,20 @@ function input(props) {
             </Grid>
             <Grid item style={{ width: "100%", marginTop: "10px" }}>
               <div className={classes.overflowWrap} id="scrollMe">
-                <Link href="/prepaid/[country]" as="/prepaid/ID">
+                <Link
+                  href={{
+                    pathname: "/prepaid/[country]",
+                    query: {
+                      test: 123,
+                    },
+                  }}
+                  as={{
+                    pathname: "/prepaid/ID",
+                    query: {
+                      test: 123,
+                    },
+                  }}
+                >
                   <a className={classes.link}>
                     <div className={classes.itemWrap}>
                       <Grid container direction="column" alignItems="center">
@@ -254,19 +267,23 @@ function input(props) {
                 <div className={classes.text}>Malaysia</div>
               </Grid>
             </Grid>
+
             <Grid item style={{ width: "100%", marginTop: "10px" }}>
               <div className={classes.overflowWrap}>
-                <div className={classes.itemWrap}>
-                  <Grid container direction="column" alignItems="center">
-                    <Grid item>
-                      <img src="/digi.png" className={classes.imgIcon} />
-                    </Grid>
-                    <Grid item className={classes.textIcon}>
-                      Digi
-                    </Grid>
-                  </Grid>
-                </div>
-
+                <Link href="/prepaid/[country]/[product]" as="/prepaid/MY/digi">
+                  <a className={classes.link}>
+                    <div className={classes.itemWrap}>
+                      <Grid container direction="column" alignItems="center">
+                        <Grid item>
+                          <img src="/digi.png" className={classes.imgIcon} />
+                        </Grid>
+                        <Grid item className={classes.textIcon}>
+                          Digi
+                        </Grid>
+                      </Grid>
+                    </div>
+                  </a>
+                </Link>
                 <div className={classes.itemWrap}>
                   <Grid container direction="column" alignItems="center">
                     <Grid item>

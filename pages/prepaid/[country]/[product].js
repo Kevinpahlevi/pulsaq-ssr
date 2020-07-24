@@ -17,11 +17,11 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Flag from "react-world-flags";
-import Confirm from "../../component/ConfirmPurchase";
+import Confirm from "../../../component/ConfirmPurchase";
 import Head from "next/head";
 import { connect } from "react-redux";
 import Router from "next/router";
-import BackFloating from "../../component/BackFloating";
+import BackFloating from "../../../component/BackFloating";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -47,13 +47,14 @@ function prepaid(props) {
     console.log(props);
   }, []);
 
-  const { country } = props.router.query;
+  const { country, product } = props.router.query;
 
   const [phone, setPhone] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [selectedProduct, setSelectedProduct] = React.useState({});
   const [selectedProductDenom, setSelectedProductDenom] = React.useState([]);
   const [selectedDenom, setSelectedDenom] = React.useState("");
+  const [selectedProductMY, setSelectedProductMY] = React.useState("");
 
   const providerID = {
     tri: { name: "Three Indonesia topup", code: "tri" },
@@ -64,6 +65,12 @@ function prepaid(props) {
     axis: { name: "Axis Indonesia topup", code: "axis" },
   };
 
+  const providerMY = [
+    { signature: "11", name: "Altel Malaysia topup", code: "altel" },
+    { signature: "22", name: "Buzzme Malaysia topup", code: "buzzme" },
+    { signature: "33", name: "Celcom Malaysia topup", code: "celcom" },
+  ];
+
   const code = { ID: "+62", MY: "+60" };
   const denoID = {
     tri: ["IDR 5000", "IDR 10,000", "IDR 50,000"],
@@ -72,6 +79,12 @@ function prepaid(props) {
     tsel: ["IDR 5000", "IDR 10,000", "IDR 50,000"],
     xl: ["IDR 5000", "IDR 20,000", "IDR 50,000"],
     axis: ["IDR 5000", "IDR 15,000", "IDR 50,000", "IDR 100,000"],
+  };
+
+  const denoMY = {
+    altel: ["MYR 5.00", "MYR 10.00"],
+    buzzme: ["MYR 5.00", "MYR 10.00", "MYR 15.00"],
+    celcom: ["MYR 5.00", "MYR 10.00", "MYR 20.00", "MYR 50.00"],
   };
 
   React.useEffect(() => {
@@ -139,7 +152,9 @@ function prepaid(props) {
       <BackFloating />
       <Paper className={classes.paper}>
         <Grid container direction="column" spacing={2}>
-          <div className={classes.title}>Prepaid - {country}</div>
+          <div className={classes.title}>
+            Prepaid - {country} - {product}
+          </div>
           <Grid item>
             <FormControl fullWidth>
               <InputLabel htmlFor="outlined-adornment-amount">
@@ -162,20 +177,76 @@ function prepaid(props) {
             </FormControl>
           </Grid>
           <Grid item>
-            {country === "ID" && selectedProduct.code && (
-              <img
-                src={`/provider/ID/${selectedProduct.code}.png`}
-                style={{
-                  width: "150px",
-                  display: "block",
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                }}
-              />
+            {country === "ID" ? (
+              // <TextField
+              //   fullWidth
+              //   id="outlined-basic"
+              //   label="Product"
+              //   value={selectedProduct.name || ""}
+              //   placeholder="Insert Phone / Bill Number"
+              //   InputProps={{
+              //     readOnly: true,
+              //   }}
+              //   InputLabelProps={{
+              //     shrink: true,
+              //   }}
+              // />
+              selectedProduct.code && (
+                <img
+                  src={`/provider/ID/${selectedProduct.code}.png`}
+                  style={{
+                    width: "150px",
+                    display: "block",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                />
+              )
+            ) : (
+              <FormControl fullWidth className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">Product</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={selectedProductMY}
+                  onChange={(e) => {
+                    console.log(e.target);
+                    setSelectedProductMY(e.target.value);
+                    const index = providerMY.findIndex(
+                      (x) => x.code === e.target.value
+                    );
+                    setSelectedProduct(providerMY[index]);
+                    setSelectedProductDenom(denoMY[e.target.value]);
+                  }}
+                >
+                  {providerMY.map((item, index) => (
+                    <MenuItem value={item.code} key={index} name={index}>
+                      {item.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             )}
           </Grid>
           {selectedProduct.code && (
             <Grid item>
+              {/* <FormControl fullWidth className={classes.formControl}>
+              <InputLabel id="demo-simple-select-label">Amount</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={selectedDenom}
+                onChange={(e) => setSelectedDenom(e.target.value)}
+                disabled={selectedProduct.name ? false : true}
+              >
+                {selectedProductDenom.map((item, index) => (
+                  <MenuItem value={item} key={index}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl> */}
+
               <div className={classes.label}>Amount</div>
               <Grid container direction="row" spacing={1}>
                 {selectedProductDenom.map((item, index) => (
@@ -183,7 +254,7 @@ function prepaid(props) {
                     <Button
                       variant="outlined"
                       onClick={() => setSelectedDenom(item)}
-                      className={selectedDenom === item ? classes.selected : ""}
+                      className={selectedDenom === item && classes.selected}
                     >
                       {item}
                     </Button>
@@ -225,8 +296,7 @@ export async function getStaticPaths() {
     paths: [
       // String variant:
       // Object variant:
-      { params: { country: "ID" } },
-      { params: { country: "MY" } },
+      { params: { country: "MY", product: "digi" } },
     ],
     fallback: false,
   };

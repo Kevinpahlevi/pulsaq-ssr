@@ -9,9 +9,20 @@ import theme from "../lib/theme.js";
 import Container from "@material-ui/core/Container";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: "10px",
+    width: "350px",
+    "@media screen and (max-width: 450px)": {
+      width: "100%",
+    },
+  },
+}));
 function MyApp(props) {
   const { Component, pageProps } = props;
+  const classes = useStyles();
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.
@@ -33,7 +44,7 @@ function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* <Header /> */}
         <CssBaseline />
-        <Container style={{ marginTop: "10px" }}>
+        <Container className={classes.root}>
           <Component {...pageProps} />
         </Container>
       </ThemeProvider>
