@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "20px",
   },
   icon: {
-    fontSize: "60px",
+    fontSize: "50px",
     color: "#FF2600",
   },
   text: {
@@ -107,8 +107,8 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
   imgIcon: {
-    width: "70px",
-    height: "70px",
+    width: "60px",
+    height: "60px",
     borderRadius: "10px",
   },
 }));
@@ -328,7 +328,7 @@ function input(props) {
                 <div className={classes.itemWrapFlag}>
                   <Grid container direction="column" alignItems="center">
                     <Grid item>
-                      <Flag code="BD" height="60" width="75" />
+                      <Flag code="BD" height="50" width="65" />
                     </Grid>
                     <Grid item className={classes.textIcon}>
                       Bangladesh
@@ -338,7 +338,7 @@ function input(props) {
                 <div className={classes.itemWrapFlag}>
                   <Grid container direction="column" alignItems="center">
                     <Grid item>
-                      <Flag code="NPL" height="60" width="75" />
+                      <Flag code="NPL" height="50" width="65" />
                     </Grid>
                     <Grid item className={classes.textIcon}>
                       Nepal
@@ -358,7 +358,7 @@ function input(props) {
                 <div className={classes.itemWrapFlag}>
                   <Grid container direction="column" alignItems="center">
                     <Grid item>
-                      <Flag code="MMR" height="60" width="75" />
+                      <Flag code="MMR" height="50" width="65" />
                     </Grid>
                     <Grid item className={classes.textIcon}>
                       Myanmar
