@@ -47,75 +47,46 @@ function prepaid(props) {
     console.log(props);
   }, []);
 
-  const { country, product } = props.router.query;
+  const { country } = props.router.query;
 
   const [phone, setPhone] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [selectedProduct, setSelectedProduct] = React.useState({});
   const [selectedProductDenom, setSelectedProductDenom] = React.useState([]);
   const [selectedDenom, setSelectedDenom] = React.useState("");
-  const [selectedProductMY, setSelectedProductMY] = React.useState("");
 
   const providerID = {
-    tri: { name: "Three Indonesia topup", code: "tri" },
-    isat: { name: "Indosat Indonesia topup", code: "isat" },
-    smartfren: { name: "Smartfren Indonesia topup", code: "smartfren" },
-    tsel: { name: "Telkomsel Indonesia topup", code: "tsel" },
-    xl: { name: "XL Indonesia topup", code: "xl" },
-    axis: { name: "Axis Indonesia topup", code: "axis" },
+    altel: { name: "ALTEL pinless topup", code: "altel" },
+    as2in1: { name: "AS2IN1 pinless topup", code: "as2in1" },
+    celcom: { name: "CELCOM pinless topup", code: "celcom" },
+    digi: { name: "DIGI pinless topup", code: "digi" },
+    hotlink: { name: "HOTLINK pinless topup", code: "hotlink" },
+    merchantrade: { name: "MERCHANTRADE pinless topup", code: "merchantrade" },
+    tunetalk: { name: "TUNE TALK pinless topup", code: "tunetalk" },
+    umobile: { name: "UMOBILE pinless topup", code: "umobile" },
+    xox: { name: "XOX pinless topup", code: "xox" },
+    yes: { name: "YES pinless topup", code: "yes" },
   };
-
-  const providerMY = [
-    { signature: "11", name: "Altel Malaysia topup", code: "altel" },
-    { signature: "22", name: "Buzzme Malaysia topup", code: "buzzme" },
-    { signature: "33", name: "Celcom Malaysia topup", code: "celcom" },
-  ];
 
   const code = { ID: "+62", MY: "+60" };
   const denoID = {
-    tri: ["IDR 5000", "IDR 10,000", "IDR 50,000"],
-    isat: ["IDR 5000", "IDR 20,000", "IDR 50,000"],
-    smartfren: ["IDR 5000", "IDR 15,000", "IDR 50,000", "IDR 100,000"],
-    tsel: ["IDR 5000", "IDR 10,000", "IDR 50,000"],
-    xl: ["IDR 5000", "IDR 20,000", "IDR 50,000"],
-    axis: ["IDR 5000", "IDR 15,000", "IDR 50,000", "IDR 100,000"],
-  };
-
-  const denoMY = {
-    altel: ["MYR 5.00", "MYR 10.00"],
-    buzzme: ["MYR 5.00", "MYR 10.00", "MYR 15.00"],
-    celcom: ["MYR 5.00", "MYR 10.00", "MYR 20.00", "MYR 50.00"],
+    altel: ["MYR 5", "MYR 10", "MYR 20"],
+    as2in1: ["MYR 5", "MYR 15", "MYR 25"],
+    celcom: ["MYR 5", "MYR 15", "MYR 20", "MYR 50"],
+    digi: ["MYR 5", "MYR 10", "MYR 20"],
+    hotlink: ["MYR 5", "MYR 15", "MYR 25"],
+    merchantrade: ["MYR 5", "MYR 15", "MYR 20", "MYR 50"],
+    tunetalk: ["MYR 5", "MYR 10", "MYR 20"],
+    umobile: ["MYR 5", "MYR 15", "MYR 25"],
+    xox: ["MYR 5", "MYR 15", "MYR 20", "MYR 50"],
+    yes: ["MYR 5", "MYR 15", "MYR 25"],
   };
 
   React.useEffect(() => {
-    if (country === "ID") {
-      IDproduct();
-    }
-  }, [phone]);
-
-  const IDproduct = () => {
-    let finalKey = null;
-    if (/^8[125]{1}[123]{1}/gim.test(phone)) finalKey = "tsel";
-    else if (/^8(?:[15]{1}[56]{1}|5[78]{1}|14)/gim.test(phone))
-      finalKey = "isat";
-    else if (/^8(?:[17]{1}[789]{1}|59[^18])/gim.test(phone)) finalKey = "xl";
-    else if (/^8(?:3[1238]{1}|59[18])/gim.test(phone)) finalKey = "axis";
-    else if (/^89[5-9]{1}/gim.test(phone)) finalKey = "tri";
-    else if (/^88[1-9]{1}/gim.test(phone)) finalKey = "smartfren";
-    else {
-      finalKey = null;
-    }
-
-    if (finalKey === null) {
-      console.log("null");
-      setSelectedProduct({});
-      setSelectedProductDenom([]);
-    } else {
-      console.log("ada");
-      setSelectedProduct(providerID[finalKey]);
-      setSelectedProductDenom(denoID[finalKey]);
-    }
-  };
+    const { product } = props.router.query;
+    setSelectedProduct(providerID[product]);
+    setSelectedProductDenom(denoID[product]);
+  }, []);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -152,9 +123,7 @@ function prepaid(props) {
       <BackFloating />
       <Paper className={classes.paper}>
         <Grid container direction="column" spacing={2}>
-          <div className={classes.title}>
-            Prepaid - {country} - {product}
-          </div>
+          <div className={classes.title}>Mobile Prepaid Malaysia</div>
           <Grid item>
             <FormControl fullWidth>
               <InputLabel htmlFor="outlined-adornment-amount">
@@ -177,76 +146,20 @@ function prepaid(props) {
             </FormControl>
           </Grid>
           <Grid item>
-            {country === "ID" ? (
-              // <TextField
-              //   fullWidth
-              //   id="outlined-basic"
-              //   label="Product"
-              //   value={selectedProduct.name || ""}
-              //   placeholder="Insert Phone / Bill Number"
-              //   InputProps={{
-              //     readOnly: true,
-              //   }}
-              //   InputLabelProps={{
-              //     shrink: true,
-              //   }}
-              // />
-              selectedProduct.code && (
-                <img
-                  src={`/provider/ID/${selectedProduct.code}.png`}
-                  style={{
-                    width: "150px",
-                    display: "block",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                  }}
-                />
-              )
-            ) : (
-              <FormControl fullWidth className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">Product</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={selectedProductMY}
-                  onChange={(e) => {
-                    console.log(e.target);
-                    setSelectedProductMY(e.target.value);
-                    const index = providerMY.findIndex(
-                      (x) => x.code === e.target.value
-                    );
-                    setSelectedProduct(providerMY[index]);
-                    setSelectedProductDenom(denoMY[e.target.value]);
-                  }}
-                >
-                  {providerMY.map((item, index) => (
-                    <MenuItem value={item.code} key={index} name={index}>
-                      {item.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+            {selectedProduct.code && (
+              <img
+                src={`/provider/MY/${selectedProduct.code}.png`}
+                style={{
+                  width: "150px",
+                  display: "block",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              />
             )}
           </Grid>
           {selectedProduct.code && (
             <Grid item>
-              {/* <FormControl fullWidth className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">Amount</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={selectedDenom}
-                onChange={(e) => setSelectedDenom(e.target.value)}
-                disabled={selectedProduct.name ? false : true}
-              >
-                {selectedProductDenom.map((item, index) => (
-                  <MenuItem value={item} key={index}>
-                    {item}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl> */}
-
               <div className={classes.label}>Amount</div>
               <Grid container direction="row" spacing={1}>
                 {selectedProductDenom.map((item, index) => (
@@ -254,7 +167,7 @@ function prepaid(props) {
                     <Button
                       variant="outlined"
                       onClick={() => setSelectedDenom(item)}
-                      className={selectedDenom === item && classes.selected}
+                      className={selectedDenom === item ? classes.selected : ""}
                     >
                       {item}
                     </Button>
@@ -265,7 +178,7 @@ function prepaid(props) {
           )}
 
           <Grid item>
-            {selectedDenom !== "" && (
+            {selectedDenom !== "" && phone !== "" && (
               <Button
                 fullWidth
                 color="primary"
@@ -296,7 +209,16 @@ export async function getStaticPaths() {
     paths: [
       // String variant:
       // Object variant:
+      { params: { country: "MY", product: "altel" } },
+      { params: { country: "MY", product: "as2in1" } },
+      { params: { country: "MY", product: "celcom" } },
       { params: { country: "MY", product: "digi" } },
+      { params: { country: "MY", product: "hotlink" } },
+      { params: { country: "MY", product: "merchantrade" } },
+      { params: { country: "MY", product: "tunetalk" } },
+      { params: { country: "MY", product: "umobile" } },
+      { params: { country: "MY", product: "xox" } },
+      { params: { country: "MY", product: "yes" } },
     ],
     fallback: false,
   };

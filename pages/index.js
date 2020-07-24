@@ -104,7 +104,12 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-block",
   },
   textIcon: {
+    fontSize: "13px",
     fontWeight: "bold",
+  },
+  textIconResize: {
+    fontWeight: "bold",
+    fontSize: "13px",
   },
   imgIcon: {
     width: "60px",
@@ -128,6 +133,19 @@ function input(props) {
     setdata(res.data);
     console.log(res);
   }
+
+  const providerMy = [
+    { name: "altel", label: "Altel" },
+    { name: "as2in1", label: "As2in1" },
+    { name: "celcom", label: "Celcom" },
+    { name: "digi", label: "Digi" },
+    { name: "hotlink", label: "Hotlink" },
+    { name: "merchantrade", label: "Merchantrade" },
+    { name: "tunetalk", label: "Tune Talk" },
+    { name: "umobile", label: "U Mobile" },
+    { name: "xox", label: "XOX" },
+    { name: "yes", label: "Yes" },
+  ];
 
   return (
     <React.Fragment>
@@ -270,63 +288,34 @@ function input(props) {
 
             <Grid item style={{ width: "100%", marginTop: "10px" }}>
               <div className={classes.overflowWrap}>
-                <Link href="/prepaid/[country]/[product]" as="/prepaid/MY/digi">
-                  <a className={classes.link}>
-                    <div className={classes.itemWrap}>
-                      <Grid container direction="column" alignItems="center">
-                        <Grid item>
-                          <img src="/digi.png" className={classes.imgIcon} />
+                {providerMy.map((item) => (
+                  <Link
+                    href="/prepaid/[country]/[product]"
+                    as={`/prepaid/MY/${item.name}`}
+                  >
+                    <a className={classes.link}>
+                      <div className={classes.itemWrap}>
+                        <Grid container direction="column" alignItems="center">
+                          <Grid item>
+                            <img
+                              src={`/provider/MY/${item.name}.png`}
+                              className={classes.imgIcon}
+                            />
+                          </Grid>
+                          {item.name === "merchantrade" ? (
+                            <Grid item className={classes.textIconResize}>
+                              {item.label}
+                            </Grid>
+                          ) : (
+                            <Grid item className={classes.textIcon}>
+                              {item.label}
+                            </Grid>
+                          )}
                         </Grid>
-                        <Grid item className={classes.textIcon}>
-                          Digi
-                        </Grid>
-                      </Grid>
-                    </div>
-                  </a>
-                </Link>
-                <div className={classes.itemWrap}>
-                  <Grid container direction="column" alignItems="center">
-                    <Grid item>
-                      <img src="/hotlink.png" className={classes.imgIcon} />
-                    </Grid>
-                    <Grid item className={classes.textIcon}>
-                      Hotlink
-                    </Grid>
-                  </Grid>
-                </div>
-
-                <div className={classes.itemWrap}>
-                  <Grid container direction="column" alignItems="center">
-                    <Grid item>
-                      <img src="/maxis.png" className={classes.imgIcon} />
-                    </Grid>
-                    <Grid item className={classes.textIcon}>
-                      Maxis
-                    </Grid>
-                  </Grid>
-                </div>
-
-                <div className={classes.itemWrap}>
-                  <Grid container direction="column" alignItems="center">
-                    <Grid item>
-                      <img src="/celcom.jpg" className={classes.imgIcon} />
-                    </Grid>
-                    <Grid item className={classes.textIcon}>
-                      Celcom
-                    </Grid>
-                  </Grid>
-                </div>
-
-                <div className={classes.itemWrap}>
-                  <Grid container direction="column" alignItems="center">
-                    <Grid item>
-                      <img src="/umobile.png" className={classes.imgIcon} />
-                    </Grid>
-                    <Grid item className={classes.textIcon}>
-                      Umobile
-                    </Grid>
-                  </Grid>
-                </div>
+                      </div>
+                    </a>
+                  </Link>
+                ))}
               </div>
             </Grid>
           </Grid>
