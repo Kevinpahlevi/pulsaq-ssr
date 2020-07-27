@@ -22,6 +22,7 @@ import Head from "next/head";
 import { connect } from "react-redux";
 import Router from "next/router";
 import BackFloating from "../../component/BackFloating";
+import PaymentGateway from "../../component/PaymentGateway";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,6 +55,7 @@ function prepaid(props) {
   const [selectedProduct, setSelectedProduct] = React.useState({});
   const [selectedProductDenom, setSelectedProductDenom] = React.useState([]);
   const [selectedDenom, setSelectedDenom] = React.useState("");
+  const [selectPayment, setSelectPayment] = React.useState("");
 
   const providerID = {
     tri: { name: "Three Indonesia topup", code: "tri" },
@@ -94,11 +96,11 @@ function prepaid(props) {
     }
 
     if (finalKey === null) {
-      console.log("null");
       setSelectedProduct({});
       setSelectedProductDenom([]);
+      setSelectedDenom("");
+      setSelectPayment("");
     } else {
-      console.log("ada");
       setSelectedProduct(providerID[finalKey]);
       setSelectedProductDenom(denoID[finalKey]);
     }
@@ -116,8 +118,8 @@ function prepaid(props) {
       selectedProduct,
       selectedDenom,
       phone,
+      selectPayment,
     });
-    setOpen(false);
     Router.push("/payment");
   };
 
@@ -161,19 +163,20 @@ function prepaid(props) {
               />
             </FormControl>
           </Grid>
-          <Grid item>
-            {country === "ID" && selectedProduct.code && (
+          {country === "ID" && selectedProduct.code && (
+            <Grid item>
               <img
                 src={`/provider/ID/${selectedProduct.code}.png`}
                 style={{
-                  width: "150px",
+                  width: "100px",
                   display: "block",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
               />
-            )}
-          </Grid>
+            </Grid>
+          )}
+
           {selectedProduct.code && (
             <Grid item>
               <div className={classes.label}>Amount</div>
@@ -192,20 +195,27 @@ function prepaid(props) {
               </Grid>
             </Grid>
           )}
-
-          <Grid item>
-            {selectedDenom !== "" && (
-              <Button
-                fullWidth
-                color="primary"
-                variant="contained"
-                onClick={() => setOpen(true)}
-              >
-                Purchase
-              </Button>
-            )}
-          </Grid>
+          {selectedDenom !== "" && (
+            <Grid item style={{ marginBottom: "10px" }}>
+              <PaymentGateway
+                selectPayment={selectPayment}
+                setSelectPayment={(a) => setSelectPayment(a)}
+              />
+            </Grid>
+          )}
         </Grid>
+        {selectPayment !== "" && (
+          <Grid item>
+            <Button
+              fullWidth
+              color="primary"
+              variant="contained"
+              onClick={() => isConfirm()}
+            >
+              Purchase
+            </Button>
+          </Grid>
+        )}
       </Paper>
     </div>
   );

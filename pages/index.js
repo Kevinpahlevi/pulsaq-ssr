@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     "@media screen and (max-width: 450px)": {
       width: "100%",
     },
-    height: "150px",
+    height: "140px",
     padding: "12px 0px 12px 12px",
     marginBottom: "10px",
   },
@@ -134,16 +134,23 @@ function input(props) {
   }
 
   const providerMy = [
-    { name: "altel", label: "Altel" },
-    { name: "as2in1", label: "As2in1" },
-    { name: "celcom", label: "Celcom" },
     { name: "digi", label: "Digi" },
     { name: "hotlink", label: "Hotlink" },
+    { name: "celcom", label: "Celcom" },
+    { name: "as2in1", label: "As2in1" },
+    { name: "umobile", label: "U Mobile" },
+    { name: "altel", label: "Altel" },
     { name: "merchantrade", label: "Merchantrade" },
     { name: "tunetalk", label: "Tune Talk" },
-    { name: "umobile", label: "U Mobile" },
     { name: "xox", label: "XOX" },
     { name: "yes", label: "Yes" },
+  ];
+
+  const internasional = [
+    { name: "Bangladesh", label: "Bangladesh" },
+    { name: "Myanmar", label: "Myanmar" },
+    { name: "Nepal", label: "Nepal" },
+    { name: "Philippines", label: "Philippines" },
   ];
 
   return (
@@ -181,15 +188,9 @@ function input(props) {
                 <Link
                   href={{
                     pathname: "/prepaid/[country]",
-                    query: {
-                      test: 123,
-                    },
                   }}
                   as={{
                     pathname: "/prepaid/ID",
-                    query: {
-                      test: 123,
-                    },
                   }}
                 >
                   <a className={classes.link}>
@@ -331,46 +332,21 @@ function input(props) {
             </Grid>
             <Grid item style={{ width: "100%", marginTop: "10px" }}>
               <div className={classes.overflowWrap}>
-                <div className={classes.itemWrapFlag}>
-                  <Grid container direction="column" alignItems="center">
-                    <Grid item>
-                      <Flag code="BD" height="50" width="65" />
+                {internasional.map((item) => (
+                  <div className={classes.itemWrap} key={item.name}>
+                    <Grid container direction="column" alignItems="center">
+                      <Grid item>
+                        <img
+                          src={`/country/${item.name}.png`}
+                          className={classes.imgIcon}
+                        />
+                      </Grid>
+                      <Grid item className={classes.textIcon}>
+                        {item.label}
+                      </Grid>
                     </Grid>
-                    <Grid item className={classes.textIcon}>
-                      Bangladesh
-                    </Grid>
-                  </Grid>
-                </div>
-                <div className={classes.itemWrapFlag}>
-                  <Grid container direction="column" alignItems="center">
-                    <Grid item>
-                      <Flag code="NPL" height="50" width="65" />
-                    </Grid>
-                    <Grid item className={classes.textIcon}>
-                      Nepal
-                    </Grid>
-                  </Grid>
-                </div>
-                <div className={classes.itemWrapFlag}>
-                  <Grid container direction="column" alignItems="center">
-                    <Grid item>
-                      <Flag code="PH" height="60" width="75" />
-                    </Grid>
-                    <Grid item className={classes.textIcon}>
-                      Phillippines
-                    </Grid>
-                  </Grid>
-                </div>
-                <div className={classes.itemWrapFlag}>
-                  <Grid container direction="column" alignItems="center">
-                    <Grid item>
-                      <Flag code="MMR" height="50" width="65" />
-                    </Grid>
-                    <Grid item className={classes.textIcon}>
-                      Myanmar
-                    </Grid>
-                  </Grid>
-                </div>
+                  </div>
+                ))}
               </div>
             </Grid>
           </Grid>

@@ -4,16 +4,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Router, { withRouter } from "next/router";
 import BarcodePop from "../component/Barcode";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
-  logoPayment: {
-    width: "100px",
-    height: "100px",
-    marginRight: "20px",
-  },
   paper: {
-    minHeight: "250px",
     padding: "20px",
   },
   bold: {
@@ -27,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     fontSize: "13px",
     fontWeight: "bold",
+    marginBottom: "20px",
   },
   tr: {
     border: "1px solid black",
@@ -89,29 +85,15 @@ function paymentPage(props) {
               <td className={classes.name}>Denom</td>
               <td>{payment.selectedDenom}</td>
             </tr>
+            <tr className={classes.tr}>
+              <td className={classes.name}>Payment Gateway</td>
+              <td>{payment.selectPayment}</td>
+            </tr>
           </tbody>
         </table>
-        <div>
-          <div className={classes.bold}>Select Payment :</div>
-          <div>
-            <img
-              src="/711.png"
-              className={classes.logoPayment}
-              onClick={() => {
-                setOpen(true);
-                setSeletecedPay("7-11");
-              }}
-            />
-            <img
-              src="/razer.png"
-              className={classes.logoPayment}
-              onClick={() => {
-                setOpen(true);
-                setSeletecedPay("Razer Pay");
-              }}
-            />
-          </div>
-        </div>
+        <Button color="primary" variant="contained" fullWidth size="small">
+          Confirm Purchase
+        </Button>
       </Paper>
     </div>
   );
