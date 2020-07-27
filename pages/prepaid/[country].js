@@ -33,9 +33,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     marginBottom: "10px",
   },
-  selected: {
-    border: "2px solid #d10000",
-  },
   label: {
     color: "grey",
     marginBottom: "10px",
@@ -120,7 +117,7 @@ function prepaid(props) {
       phone,
       selectPayment,
     });
-    Router.push("/payment");
+    Router.push("/purchase-summary");
   };
 
   return (
@@ -168,7 +165,7 @@ function prepaid(props) {
               <img
                 src={`/provider/ID/${selectedProduct.code}.png`}
                 style={{
-                  width: "100px",
+                  height: "100px",
                   display: "block",
                   marginLeft: "auto",
                   marginRight: "auto",
@@ -184,9 +181,12 @@ function prepaid(props) {
                 {selectedProductDenom.map((item, index) => (
                   <Grid item key={index}>
                     <Button
-                      variant="outlined"
+                      color={selectedDenom === item ? "primary" : "default"}
+                      variant={
+                        selectedDenom === item ? "contained" : "outlined"
+                      }
                       onClick={() => setSelectedDenom(item)}
-                      className={selectedDenom === item ? classes.selected : ""}
+                      size="small"
                     >
                       {item}
                     </Button>
@@ -203,19 +203,19 @@ function prepaid(props) {
               />
             </Grid>
           )}
+          {selectPayment !== "" && (
+            <Grid item>
+              <Button
+                fullWidth
+                color="primary"
+                variant="contained"
+                onClick={() => isConfirm()}
+              >
+                Purchase
+              </Button>
+            </Grid>
+          )}
         </Grid>
-        {selectPayment !== "" && (
-          <Grid item>
-            <Button
-              fullWidth
-              color="primary"
-              variant="contained"
-              onClick={() => isConfirm()}
-            >
-              Purchase
-            </Button>
-          </Grid>
-        )}
       </Paper>
     </div>
   );

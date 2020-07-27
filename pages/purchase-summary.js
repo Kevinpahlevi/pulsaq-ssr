@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "5px",
   },
   table: {
-    border: "1px solid black",
     borderCollapse: "collapse",
     width: "100%",
     fontSize: "13px",
@@ -25,15 +24,17 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "20px",
   },
   tr: {
-    border: "1px solid black",
     borderCollapse: "collapse",
   },
   name: {
-    border: "1px solid black",
     borderCollapse: "collapse",
     color: "white",
     background: "#FF2600",
     width: "100px",
+  },
+  title: {
+    fontWeight: "bold",
+    marginBottom: "10px",
   },
 }));
 
@@ -41,7 +42,6 @@ function paymentPage(props) {
   const classes = useStyles();
   const { payment } = props;
   const [open, setOpen] = React.useState(false);
-  const [selectedPay, setSeletecedPay] = React.useState("");
 
   React.useEffect(() => {
     console.log(props);
@@ -53,14 +53,20 @@ function paymentPage(props) {
     }
   }, []);
 
+  const handleConfirm = () => {
+    setOpen(false);
+    Router.push("/");
+  };
+
   return (
     <div>
       <BarcodePop
         open={open}
         handleClose={() => setOpen(false)}
-        type={selectedPay}
+        handleConfirm={() => handleConfirm()}
       />
       <Paper className={classes.paper}>
+        <div className={classes.title}>Purchase Summary</div>
         <table className={classes.table}>
           <tbody>
             <tr className={classes.tr}>
@@ -86,12 +92,22 @@ function paymentPage(props) {
               <td>{payment.selectedDenom}</td>
             </tr>
             <tr className={classes.tr}>
-              <td className={classes.name}>Payment Gateway</td>
+              <td className={classes.name}>Price</td>
+              <td>{payment.selectedDenom}</td>
+            </tr>
+            <tr className={classes.tr}>
+              <td className={classes.name}>Payment</td>
               <td>{payment.selectPayment}</td>
             </tr>
           </tbody>
         </table>
-        <Button color="primary" variant="contained" fullWidth size="small">
+        <Button
+          color="primary"
+          variant="contained"
+          fullWidth
+          size="small"
+          onClick={() => setOpen(true)}
+        >
           Confirm Purchase
         </Button>
       </Paper>

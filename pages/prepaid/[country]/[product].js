@@ -22,7 +22,7 @@ import Head from "next/head";
 import { connect } from "react-redux";
 import Router from "next/router";
 import BackFloating from "../../../component/BackFloating";
-
+import PaymentGateway from "../../../component/PaymentGateway";
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: "20px",
@@ -54,6 +54,7 @@ function prepaid(props) {
   const [selectedProduct, setSelectedProduct] = React.useState({});
   const [selectedProductDenom, setSelectedProductDenom] = React.useState([]);
   const [selectedDenom, setSelectedDenom] = React.useState("");
+  const [selectPayment, setSelectPayment] = React.useState("");
 
   const providerID = {
     altel: { name: "ALTEL pinless topup", code: "altel" },
@@ -100,9 +101,9 @@ function prepaid(props) {
       selectedProduct,
       selectedDenom,
       phone,
+      selectPayment,
     });
-    setOpen(false);
-    Router.push("/payment");
+    Router.push("/purchase-summary");
   };
 
   return (
@@ -150,7 +151,7 @@ function prepaid(props) {
               <img
                 src={`/provider/MY/${selectedProduct.code}.png`}
                 style={{
-                  width: "150px",
+                  height: "100px",
                   display: "block",
                   marginLeft: "auto",
                   marginRight: "auto",
@@ -165,9 +166,12 @@ function prepaid(props) {
                 {selectedProductDenom.map((item, index) => (
                   <Grid item key={index}>
                     <Button
-                      variant="outlined"
+                      variant={
+                        selectedDenom === item ? "contained" : "outlined"
+                      }
                       onClick={() => setSelectedDenom(item)}
-                      className={selectedDenom === item ? classes.selected : ""}
+                      color={selectedDenom === item ? "primary" : "default"}
+                      size="small"
                     >
                       {item}
                     </Button>
@@ -177,18 +181,26 @@ function prepaid(props) {
             </Grid>
           )}
 
-          <Grid item>
-            {selectedDenom !== "" && phone !== "" && (
+          {selectedDenom !== "" && (
+            <Grid item>
+              <PaymentGateway
+                selectPayment={selectPayment}
+                setSelectPayment={(a) => setSelectPayment(a)}
+              />
+            </Grid>
+          )}
+          {selectPayment !== "" && phone !== "" && (
+            <Grid item>
               <Button
                 fullWidth
                 color="primary"
                 variant="contained"
-                onClick={() => setOpen(true)}
+                onClick={() => isConfirm()}
               >
                 Purchase
               </Button>
-            )}
-          </Grid>
+            </Grid>
+          )}
         </Grid>
       </Paper>
     </div>
