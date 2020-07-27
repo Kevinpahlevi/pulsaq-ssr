@@ -42,8 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
     height: "150px",
     padding: "12px 0px 12px 12px",
-    marginBottom: "20px",
-    borderRadius: "10px",
+    marginBottom: "10px",
   },
   imgSlide: {
     width: "98%",
@@ -170,7 +169,7 @@ function input(props) {
             </div>
           </Slider>
         </div>
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={0}>
           <Grid container direction="column" style={{ width: "100%" }}>
             <Grid item>
               <Grid container direction="column">
@@ -278,7 +277,7 @@ function input(props) {
         </Paper>
 
         {/* MALAYSIA */}
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={0}>
           <Grid container direction="column" style={{ width: "100%" }}>
             <Grid item>
               <Grid container direction="column">
@@ -292,6 +291,7 @@ function input(props) {
                   <Link
                     href="/prepaid/[country]/[product]"
                     as={`/prepaid/MY/${item.name}`}
+                    key={item.name}
                   >
                     <a className={classes.link}>
                       <div className={classes.itemWrap}>
@@ -322,7 +322,7 @@ function input(props) {
         </Paper>
 
         {/* INTERNASIONAL */}
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={0}>
           <Grid container direction="column" style={{ width: "100%" }}>
             <Grid item>
               <Grid container direction="column">

@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     "@media screen and (max-width: 450px)": {
       width: "100%",
     },
+    padding: "0px 0px 20px 0px",
   },
 }));
 function MyApp(props) {
