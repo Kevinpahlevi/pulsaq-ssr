@@ -97,7 +97,7 @@ function prepaid(props) {
     const { addPayment } = props;
     addPayment({
       country: country,
-      type: "prepaid",
+      type: "Prepaid",
       selectedProduct,
       selectedDenom,
       phone,
