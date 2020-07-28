@@ -64,9 +64,9 @@ function postpaid(props) {
           currency: currency[country],
         }}
       />
-      <div className={classes.title}>Billing Payments - {country}</div>
       <Paper className={classes.paper}>
         <Grid container direction="column" spacing={2}>
+          <div className={classes.title}>Billing Payments - {country}</div>
           <Grid item>
             <FormControl fullWidth className={classes.formControl}>
               <InputLabel id="demo-simple-select-label">Product</InputLabel>

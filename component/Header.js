@@ -20,7 +20,8 @@ import MailIcon from "@material-ui/icons/Mail";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    display: "flex",
+    justifyContent: "center",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -94,7 +95,7 @@ export default function ButtonAppBar() {
   );
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      {/* <AppBar position="static">
         <Toolbar>
           <IconButton
             edge="start"
@@ -112,15 +113,32 @@ export default function ButtonAppBar() {
           </Typography>
           <Button color="inherit">Help</Button>
         </Toolbar>
-      </AppBar>
-      <SwipeableDrawer
+      </AppBar> */}
+      <div>
+        <Link href="/">
+          <a
+            style={{
+              color: "black",
+              textDecoration: "none",
+              fontSize: "30px",
+              fontWeight: "bold",
+            }}
+          >
+            <img
+              src="/logo_pulsa_nobg.png"
+              style={{ width: "250px", height: "110px" }}
+            />
+          </a>
+        </Link>
+      </div>
+      {/* <SwipeableDrawer
         anchor={anchor}
         open={state[anchor]}
         onClose={toggleDrawer(anchor, false)}
         onOpen={toggleDrawer(anchor, true)}
       >
         {list(anchor)}
-      </SwipeableDrawer>
+      </SwipeableDrawer> */}
     </div>
   );
 }

@@ -22,8 +22,8 @@ app.prepare().then(() => {
     } else {
       handle(req, res, parsedUrl);
     }
-  }).listen(3000, (err) => {
+  }).listen(process.env.PORT || 3000, (err) => {
     if (err) throw err;
-    console.log("> SSR - Ready on http://localhost:3000");
+    console.log("> SSR - Ready on process.env.PORT || 4000");
   });
 });

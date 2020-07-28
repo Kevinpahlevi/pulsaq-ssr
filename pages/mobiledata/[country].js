@@ -39,88 +39,54 @@ function data(props) {
   const [selectedProduct, setSelectedProduct] = React.useState({});
   const [selectedProductDenom, setSelectedProductDenom] = React.useState([]);
   const [selectedDenom, setSelectedDenom] = React.useState("");
+  const { country } = props.router.query;
 
-  const providerID = [
-    { signature: "89", name: "Three Indonesia data package", code: "three" },
-    {
-      signature: "81",
-      name: "Indosat Indonesia data package",
-      code: "indosat",
-    },
-    {
-      signature: "88",
-      name: "Smartfren Indonesia data package",
-      code: "smartfren",
-    },
-  ];
-
-  const providerMY = [
-    { signature: "11", name: "Altel Malaysia topup", code: "altel" },
-    { signature: "22", name: "Buzzme Malaysia topup", code: "buzzme" },
-    { signature: "33", name: "Celcom Malaysia topup", code: "celcom" },
-  ];
+  const providerID = {
+    tri: { name: "Three Indonesia topup", code: "three" },
+    isat: { name: "Indosat Indonesia topup", code: "indosat" },
+    smartfren: { name: "Smartfren Indonesia topup", code: "smartfren" },
+    tsel: { name: "Telkomsel Indonesia topup", code: "tsel" },
+    xl: { name: "XL Indonesia topup", code: "xl" },
+    axis: { name: "Axis Indonesia topup", code: "axis" },
+  };
 
   const code = { ID: "+62", MY: "+60" };
   const denoID = {
-    three: ["1GB - IDR 5000", "2,5GB - IDR 10,000", "15GB - IDR 50,000"],
-    indosat: ["500MB - IDR 5000", "2,5GB - IDR 20,000", "6GB - IDR 50,000"],
-    smartfren: [
-      "1GB - IDR 5000",
-      "4GB - IDR 15,000",
-      "15GB - IDR 50,000",
-      "35GB - IDR 100,000",
-    ],
+    tri: ["IDR 5000", "IDR 10,000", "IDR 50,000"],
+    isat: ["IDR 5000", "IDR 20,000", "IDR 50,000"],
+    smartfren: ["IDR 5000", "IDR 15,000", "IDR 50,000", "IDR 100,000"],
+    tsel: ["IDR 5000", "IDR 10,000", "IDR 50,000"],
+    xl: ["IDR 5000", "IDR 20,000", "IDR 50,000"],
+    axis: ["IDR 5000", "IDR 15,000", "IDR 50,000", "IDR 100,000"],
   };
-  const denoMY = {
-    altel: ["MYR 5.00", "MYR 10.00"],
-    buzzme: ["MYR 5.00", "MYR 10.00", "MYR 15.00"],
-    celcom: ["MYR 5.00", "MYR 10.00", "MYR 20.00", "MYR 50.00"],
-  };
-
-  const { country } = props.router.query;
 
   React.useEffect(() => {
     if (country === "ID") {
       IDproduct();
-    } else if (country === "MY") {
-      MYproduct();
     }
   }, [phone]);
 
   const IDproduct = () => {
-    const regex = { three: /^89/, indosat: /^81/, smartfren: /^88/ };
-    if (regex.three.test(phone)) {
-      console.log("3");
-      setSelectedProduct(providerID[0]);
-      setSelectedProductDenom(denoID.three);
-    } else if (regex.indosat.test(phone)) {
-      console.log("indosat");
-      setSelectedProduct(providerID[1]);
-      setSelectedProductDenom(denoID.indosat);
-    } else if (regex.smartfren.test(phone)) {
-      console.log("smartfren");
-      setSelectedProduct(providerID[2]);
-      setSelectedProductDenom(denoID.smartfren);
-    } else {
-      setSelectedProduct({});
-      setSelectedProductDenom([]);
+    let finalKey = null;
+    if (/^8[125]{1}[123]{1}/gim.test(phone)) finalKey = "tsel";
+    else if (/^8(?:[15]{1}[56]{1}|5[78]{1}|14)/gim.test(phone))
+      finalKey = "isat";
+    else if (/^8(?:[17]{1}[789]{1}|59[^18])/gim.test(phone)) finalKey = "xl";
+    else if (/^8(?:3[1238]{1}|59[18])/gim.test(phone)) finalKey = "axis";
+    else if (/^89[5-9]{1}/gim.test(phone)) finalKey = "tri";
+    else if (/^88[1-9]{1}/gim.test(phone)) finalKey = "smartfren";
+    else {
+      finalKey = null;
     }
-  };
 
-  const MYproduct = () => {
-    const regex = { altel: /^11/, buzzme: /^22/, celcom: /^33/ };
-    if (regex.altel.test(phone)) {
-      setSelectedProduct(providerMY[0]);
-      setSelectedProductDenom(denoMY.altel);
-    } else if (regex.buzzme.test(phone)) {
-      setSelectedProduct(providerMY[1]);
-      setSelectedProductDenom(denoMY.buzzme);
-    } else if (regex.celcom.test(phone)) {
-      setSelectedProduct(providerMY[2]);
-      setSelectedProductDenom(denoMY.celcom);
-    } else {
+    if (finalKey === null) {
+      console.log("null");
       setSelectedProduct({});
       setSelectedProductDenom([]);
+    } else {
+      console.log("ada");
+      setSelectedProduct(providerID[finalKey]);
+      setSelectedProductDenom(denoID[finalKey]);
     }
   };
 
@@ -142,9 +108,9 @@ function data(props) {
           denom: selectedDenom,
         }}
       />
-      <div className={classes.title}>Data - {country}</div>
       <Paper className={classes.paper}>
         <Grid container direction="column" spacing={2}>
+          <div className={classes.title}>Data - {country}</div>
           <Grid item>
             <FormControl fullWidth variant="outlined">
               <InputLabel htmlFor="outlined-adornment-amount">
@@ -153,7 +119,11 @@ function data(props) {
               <OutlinedInput
                 id="outlined-adornment-amount"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => {
+                  if (/^[0-9]*$/.test(e.target.value)) {
+                    setPhone(e.target.value);
+                  }
+                }}
                 startAdornment={
                   <InputAdornment position="start">
                     {code[country] || ""}

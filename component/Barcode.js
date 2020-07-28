@@ -5,8 +5,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Barcode from "react-barcode";
 
-export default function AlertDialog({ open, handleClose, confirm, data }) {
+export default function AlertDialog({ open, handleClose, handleConfirm }) {
   return (
     <div>
       <Dialog
@@ -15,25 +16,18 @@ export default function AlertDialog({ open, handleClose, confirm, data }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Confirm Purchase"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Payment Barcode"}</DialogTitle>
         <DialogContent>
-          {/* <DialogContentText id="alert-dialog-description"></DialogContentText> */}
-          <div>{data.product.name}</div>
-          <div>{data.denom}</div>
-          <div>{data.target}</div>
+          <DialogContentText id="alert-dialog-description">
+            Barcode transaksi akan dikirim melalui chat.
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Cancel
+            Close
           </Button>
-          <Button
-            onClick={handleClose}
-            color="primary"
-            autoFocus
-            variant="contained"
-            onClick={confirm}
-          >
-            Continue
+          <Button onClick={handleConfirm} color="primary" variant="contained">
+            Confirm
           </Button>
         </DialogActions>
       </Dialog>

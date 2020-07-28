@@ -16,7 +16,7 @@ export default class MyDocument extends Document {
           />
           {/* <link rel="icon" type="image/x-icon" href="/logo.ico" /> */}
         </Head>
-        <body>
+        <body style={{ background: "#f7f7f7" }}>
           <Main />
           <NextScript />
         </body>

@@ -18,9 +18,9 @@ export default function AlertDialog({ open, handleClose, confirm, data }) {
         <DialogTitle id="alert-dialog-title">{"Confirm Purchase"}</DialogTitle>
         <DialogContent>
           {/* <DialogContentText id="alert-dialog-description"></DialogContentText> */}
-          <div>{data.product.name}</div>
-          <div>{data.denom}</div>
-          <div>{data.target}</div>
+          <div>{data.product}</div>
+          <div>{data.phone}</div>
+          <div>{data.currency + " " + data.amount}</div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -31,7 +31,6 @@ export default function AlertDialog({ open, handleClose, confirm, data }) {
             color="primary"
             autoFocus
             variant="contained"
-            onClick={confirm}
           >
             Continue
           </Button>

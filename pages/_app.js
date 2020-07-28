@@ -7,9 +7,23 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../lib/theme.js";
 import Container from "@material-ui/core/Container";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: "10px",
+    width: "350px",
+    "@media screen and (max-width: 450px)": {
+      width: "100%",
+    },
+    padding: "0px 0px 20px 0px",
+  },
+}));
 function MyApp(props) {
   const { Component, pageProps } = props;
+  const classes = useStyles();
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.
@@ -20,7 +34,7 @@ function MyApp(props) {
   }, []);
 
   return (
-    <React.Fragment>
+    <div style={{ background: "#f7f7f7" }}>
       <Head>
         <title>My page</title>
         <meta
@@ -29,13 +43,13 @@ function MyApp(props) {
         />
       </Head>
       <ThemeProvider theme={theme}>
-        <Header />
+        {/* <Header /> */}
         <CssBaseline />
-        <Container style={{ marginTop: "40px" }}>
+        <Container className={classes.root}>
           <Component {...pageProps} />
         </Container>
       </ThemeProvider>
-    </React.Fragment>
+    </div>
   );
 }
 export default wrapper.withRedux(MyApp);
