@@ -73,6 +73,21 @@ function prepaid(props) {
     axis: ["IDR 5000", "IDR 15,000", "IDR 50,000", "IDR 100,000"],
   };
 
+  const dummyDeno = [
+    "15",
+    "20",
+    "25",
+    "30",
+    "40",
+    "50",
+    "75",
+    "100",
+    "150",
+    "200",
+    "300",
+    "500",
+  ];
+
   React.useEffect(() => {
     if (country === "ID") {
       IDproduct();
@@ -178,15 +193,15 @@ function prepaid(props) {
             <Grid item>
               <div className={classes.label}>Amount</div>
               <Grid container direction="row" spacing={1}>
-                {selectedProductDenom.map((item, index) => (
-                  <Grid item key={index}>
+                {dummyDeno.map((item, index) => (
+                  <Grid item key={index} xs={4}>
                     <Button
                       color={selectedDenom === item ? "primary" : "default"}
                       variant={
                         selectedDenom === item ? "contained" : "outlined"
                       }
                       onClick={() => setSelectedDenom(item)}
-                      size="small"
+                      fullWidth
                     >
                       {item}
                     </Button>
