@@ -12,15 +12,13 @@ const useStyles = makeStyles((theme) => ({
     padding: "20px",
   },
   bold: {
-    fontWeight: "bold",
     marginTop: "20px",
     marginBottom: "5px",
   },
   table: {
     borderCollapse: "collapse",
     width: "100%",
-    fontSize: "13px",
-    fontWeight: "bold",
+    fontSize: "15px",
     marginBottom: "20px",
   },
   tr: {
@@ -28,9 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   name: {
     borderCollapse: "collapse",
-    color: "white",
-    background: "#FF2600",
-    width: "100px",
+    width: "80px",
   },
   title: {
     fontWeight: "bold",
@@ -71,33 +67,33 @@ function paymentPage(props) {
           <tbody>
             <tr className={classes.tr}>
               <td className={classes.name}>Type</td>
-              <td> {payment.type} </td>
+              <td>: {payment.type} </td>
             </tr>
             <tr className={classes.tr}>
               <td className={classes.name}>Country</td>
-              <td>{payment.country}</td>
+              <td>: {payment.country}</td>
             </tr>
             <tr className={classes.tr}>
               <td className={classes.name}>Phone</td>
-              <td>{payment.phone}</td>
+              <td>: {payment.phone}</td>
             </tr>
             <tr className={classes.tr}>
               <td className={classes.name}>Product</td>
               <td>
-                {payment.selectedProduct ? payment.selectedProduct.name : ""}
+                : {payment.selectedProduct ? payment.selectedProduct.name : ""}
               </td>
             </tr>
             <tr className={classes.tr}>
               <td className={classes.name}>Denom</td>
-              <td>{payment.selectedDenom}</td>
+              <td>: {payment.selectedDenom}</td>
             </tr>
             <tr className={classes.tr}>
               <td className={classes.name}>Price</td>
-              <td>{payment.selectedDenom}</td>
+              <td>: {payment.selectedDenom}</td>
             </tr>
             <tr className={classes.tr}>
               <td className={classes.name}>Payment</td>
-              <td>{payment.selectPayment}</td>
+              <td>: {payment.selectPayment}</td>
             </tr>
           </tbody>
         </table>

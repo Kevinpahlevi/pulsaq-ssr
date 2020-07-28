@@ -74,18 +74,18 @@ function prepaid(props) {
   };
 
   const dummyDeno = [
-    "15",
-    "20",
-    "25",
-    "30",
-    "40",
-    "50",
-    "75",
-    "100",
-    "150",
-    "200",
-    "300",
-    "500",
+    "IDR 15,000",
+    "IDR 20,000",
+    "IDR 25,000",
+    "IDR 30,000",
+    "IDR 40,000",
+    "IDR 50,000",
+    "IDR 75,000",
+    "IDR 100,000",
+    "IDR 150,000",
+    "IDR 200,000",
+    "IDR 300,000",
+    "IDR 500,000",
   ];
 
   React.useEffect(() => {
@@ -202,6 +202,7 @@ function prepaid(props) {
                       }
                       onClick={() => setSelectedDenom(item)}
                       fullWidth
+                      size="small"
                     >
                       {item}
                     </Button>
